@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    
+    include '.common_lib/common.php';
     
     $flag = "NO";
     $sql = "show tables from web_baedal_DB";
