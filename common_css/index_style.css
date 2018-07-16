@@ -132,11 +132,13 @@ section{
 
 
 footer {
-	width: 1200px;
 	margin: 20px auto 0 auto;
 	padding-top: 0;
 	height: 120px;
-	border: 1px solid black;
+	position:absolute;
+    bottom:0;
+    width:100%;
+    background:white;
 }
 
 /*로고div*/

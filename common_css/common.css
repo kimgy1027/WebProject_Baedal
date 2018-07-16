@@ -15,6 +15,7 @@ body {
 	overflow: scroll;
 	font-family: NANUMSQUARER;
 	border: 1px solid black; /*실 선 */
+	font-weight: bold;
 }
 
 header {
@@ -132,6 +133,5 @@ footer {
 	margin: 20px auto 0 auto;
 	padding-top: 0;
 	height: 120px;
-	border: 1px solid black;
 }
 
