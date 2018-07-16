@@ -16,16 +16,13 @@
                 </script>";
     }else{
         $search = $_GET[search];
-        if(!$_GET[tob]){
-            $tob = "whore";
-        }else{
-            $tob = $_GET[tob];
-        }
+        
     }
-    var_dump($search);
-    $sql = "select * from store_regi where";
+    $sql = "select * from store_regi where store_type = '$search'";
     
- 
+    $result = mysqli_query($con, $sql);
+    
+    $row = mysqli_fetch_array($result);
     
 ?>
 
@@ -70,7 +67,7 @@
 			</select>
 		</div>
 		<!-- end of head_list -->
-
+		
 		<div id='search_window'>
 			<input id=text type="text" class='input_text' name="search"
 				onkeydown="enterSearch()" />
@@ -86,7 +83,7 @@
 
 	<div class="store_list">
 	
-	<?php   ?>
+	
 		<div class="store_list_info1">
 			
 			<!-- DB에서 불러온 가게수에 따라서 div 생성하면댄다 >내부 내용도 써야함 -->
