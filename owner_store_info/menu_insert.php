@@ -18,6 +18,8 @@
         return $data;
     }
     
+    $registration_number = $_POST[registration_number];
+    
     $category_name = $_POST[category_name];
     $menu_name = $_POST[menu_name];
     $menu_comp = $_POST[menu_comp];
@@ -79,7 +81,7 @@
     for($i = 0; $i<$count ; $i++){
         $sql = "insert into menu (registration_number, category_name, menu_name, menu_comp,";
         $sql .= " menu_price, menu_img)";
-        $sql .= " values('123456', '$category_name[$i]', '$menu_name[$i]', '$menu_comp[$i]', '$menu_price[$i]', ";
+        $sql .= " values('$registration_number', '$category_name[$i]', '$menu_name[$i]', '$menu_comp[$i]', '$menu_price[$i]', ";
         $sql .= " '$copied_file_name[$i]')";
         mysqli_query($con, $sql);  // $sql 에 저장된 명령 실행
     }

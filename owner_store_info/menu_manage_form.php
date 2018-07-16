@@ -8,8 +8,11 @@
     }
     
     if(isset($_POST[business_license])){
+        
         $business_license =$_POST[business_license];
     }
+    
+    $business_license = '123456';
     
     $sql = "select * from store_regi where business_license='$business_license'" ;
    $result  = mysqli_query($con, $sql);
@@ -320,27 +323,27 @@
                       <div class="container">
                         <section id="panel-1" style="border:1px solid green;">
                           <main>
-                          	<?php 
-                          	while($row = mysqli_fetch_array($result)){
-                          	?>    
+                          <form class='insert_form' name="insert_form" method="post" action="./menu_insert.php"  enctype="multipart/form-data">
+							<input name="registration_number" type="hidden" value="<?=$business_license?>">	
+                              	<?php 
+                              	while($row = mysqli_fetch_array($result)){
+                              	    $category_name = $row[category_name];
+                              	    $menu_name = $row[menu_name];
+                              	    $menu_comp = $row[menu_comp];
+                              	    $menu_price = $row[menu_price];
+                              	    $menu_img = $row[menu_img];
+                              	    $dir_menu_img = "./menu_img_data/".$menu_img;
+                              	   
+                              	?>    
                           	<div class='category_area'>
                 				<div class='category_section'>
-                					<h1 class='category_h1'><?= $row[category_name] ?></h1>
+                					<h1 class='category_h1'><?= $category_name ?></h1>
                 					<input class='del_category_btn' type='button' onclick='del_category(this)' value='카테고리 전체 삭제'>
                 				</div>
 							<?php 
-							    $category = $row[category_name];
-							     while($row[category_name] == $category_name){
-							    
-							    $category_name = $row[category_name];
-							    $menu_name = $row[menu_name];
-							    $menu_comp = $row[menu_comp];
-							    $menu_price = $row[menu_price];
-							    $menu_img = $row[menu_img];
-							    $dir_menu_img = "./menu_img_data/".$menu_img;
-							    
-							    
-							    
+                          	    
+                              	    
+							while($row[category_name] == $category){
 							?>
 								<div class='menu_info'>
                     			<div class='mn_info_input'>
@@ -357,7 +360,8 @@
                     	   		</div>		
 							
 							<?php 
-							}
+							         $category = $row[category_name];
+							     }
 							?>
 					<div class='add_menu'>
 						<input class='category_name' type='text' value='<?= $category_name ?>'> <br>
@@ -367,23 +371,20 @@
 					    <input class='menu_insert_btn' type='button' value='메뉴추가' onclick='add_menu(this)'>*메뉴추가 이후에 이미지를 설정해 줄 수 있습니다! "+
 			    	</div>
 			</div>    
-                          	 
-                     <div class="a">
-								<input class="insert_input" type="text" placeholder="추가시킬 카테고리명을 입력하세요!"> <input class="ctgr_insert_btn" type="button" value="추가" onclick='add_category()'>
-								</div>
-								<div>
-									<button type='button' onclick='check_menu()'>등록</button>
-								</div>     	 
-                          	 
-                          	 <?php
+                          	  <?php
                           	 
                           	 
                           	}
                           	?>
+                  
+                          	 
+                          	
                           
                           
-                            <form class='insert_form' name="insert_form" method="post" action="./menu_insert.php"  enctype="multipart/form-data">
-								
+                          
+                          
+                          
+                            
 								<div class="a">
 								<input class="insert_input" type="text" placeholder="추가시킬 카테고리명을 입력하세요!"> <input class="ctgr_insert_btn" type="button" value="추가" onclick='add_category()'>
 								</div>
