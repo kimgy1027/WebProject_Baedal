@@ -1,3 +1,59 @@
+ <?php
+       session_start();
+    	$id = $_SESSTION['id'];
+    
+       include "../common_lib/common.php";
+    
+      $flag = "NO";
+      $sql = "show tables from web_baedal_DB";
+      $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
+      while($row=mysqli_fetch_row($result)){
+        if($row[0]==="order"){
+          $flag = "OK";
+          break;
+        }
+      }
+      
+      if($flag !=="OK"){
+          $sql = "create table order(
+    	no int(255) not null AUTO_INCREMENT,
+          business_license varchar(50) not null,
+    	order_date varchar(10) not null,
+    	order_time varchar(10) not null,
+    	id varchar(10) not null,
+    	address varchar(10) not null,
+    	phone varchar(10) not null,
+    	request varchar(10) not null,
+    	cart_num int(255) not null,
+    	total varchar(10) not null,
+    	pay varchar(5) not null,
+    	state varchar(5) not null,      
+          primary key(cart_num) , foreign key()
+    ); ";
+        if(mysqli_query($con, $sql)){
+          echo "<script>
+            alert('order 테이블이 생성되었습니다!');
+          </script>";
+        }else{
+          echo "<script>
+            alert('order 테이블 생성실패');
+          </script>";
+        }
+      }  
+    
+      $sql= "select * from order where id='$id' order by no desc";  
+      $result= mysqli_query($con, $sql);  
+      
+      if($row=mysqli_fetch_row($result)){
+         $address=$row['address'];
+         $phone=$row['phone'];
+      }  
+      mysqli_close($con);
+
+ ?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +63,15 @@
     <link rel="stylesheet" href="./css/order_form.css?v=6">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
+	function loadData(){
+		if(isset($address)){
+			document.order_form.address.value=$address;
+		}
+		if(isset($phone)){
+			document.order_form.phone.value=$phone;
+		}
+	}
+
     	$(function(){ 
     	  $('.bt_up').click(function(){ 
     	    var n = $('.bt_up').index(this);
@@ -23,14 +88,23 @@
     	  });
     	}) 
     	  
-    	function orderOk(){
-    		
-    		
+    	function orderOk()
+    		if(!document.order_form.address.value){
+             	 alert("배달 받으실 주소를 입력해주세요!");
+              	  document.order_form.address.focus();
+              	return ;
+ 		}
+		if(!document.order_form.phone.value){
+             	 alert("배달시 연락받을 전화번호를 입력해주세요!");
+              	  document.order_form.address.focus();
+              	return ;
+ 		} 
+	document.order_form.submit();				   		
     	}
     </script>
     
 </head>
-<body>
+<body onload="loadData()">
 	<header>
 		<?php include "../common_lib/top_login1.php"; ?>
 	</header>
@@ -60,7 +134,7 @@
 			<p>02 주문 정보
 			<table>
 			<tr class="tr1"><td class="td1">주문 메뉴<td class="td2">수량<td class="td3">결제금액<td class="td4">삭제
-			<tr class="tr2"><td class="td1">메늉<?php ?><td class="td2"><input type="text" size=1 class="num"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3">결제금액ㄱ<td class="td4"><img src="../common_img/cancel.png">
+			<tr class="tr2"><td class="td1"><input type="hidden" name=""><?php ?><td class="td2"><input type="text" size=1 class="num"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3">결제금액ㄱ<td class="td4"><img src="../common_img/cancel.png">
 			</table>
 		</div><!-- end of order_info -->
 		<div class="pay_info">
@@ -106,7 +180,7 @@
 			</table>
 		</div><!-- end of pay_info -->		
 		<div class="pay_btn">
-			<button id="pay_ok_btn" onclick="orderOk()">결 제 하 기</button><button id="pay_cancel_btn">취 소 하 기</button>
+			<button id="pay_ok_btn" onclick="orderOk()">결 제 하 기</button><button id="pay_cancel_btn" type="button onclick="javascript:history.go(-1)">취 소 하 기</button>
 		</div>
 		
 	</div><!-- end of order -->		
