@@ -3,7 +3,39 @@
     	$id = $_SESSTION['id'];
     
        include "../common_lib/common.php";
-    
+         
+       $flag = "NO";
+       $sql = "show tables from web_baedal_DB";
+       $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
+       while($row=mysqli_fetch_row($result)){
+           if($row[0]==="cart"){
+               $flag = "OK";
+               break;
+           }
+       }
+       
+       if($flag !=="OK"){
+           $sql = "create table cart(
+    	no int(255) not null AUTO_INCREMENT,
+    	cart_num int(255) not null,
+          id varchar(10) not null,
+          business_license varchar(50) not null,
+          menu_name varchar(20) not null,
+    	menu_price varchar(10) not null,
+    	menu_count varchar(5) not null,
+          primary key(no)
+    )";
+           if(mysqli_query($con, $sql)){
+               echo "<script>
+            alert('cart 테이블이 생성되었습니다!');
+          </script>";
+           }else{
+               echo "<script>
+            alert('cart 테이블 생성실패');
+          </script>";
+           }
+       }
+       
       $flag = "NO";
       $sql = "show tables from web_baedal_DB";
       $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
@@ -15,33 +47,34 @@
       }
       
       if($flag !=="OK"){
-          $sql = "create table order(
-    	no int(255) not null AUTO_INCREMENT,
-          business_license varchar(50) not null,
-    	order_date varchar(10) not null,
-    	order_time varchar(10) not null,
-    	id varchar(10) not null,
-    	address varchar(10) not null,
-    	phone varchar(10) not null,
-    	request varchar(10) not null,
-    	cart_num int(255) not null,
-    	total varchar(10) not null,
-    	pay varchar(5) not null,
-    	state varchar(5) not null,      
-          primary key(cart_num) , foreign key()
-    ); ";
+          $sql = "create table order_list(
+            	no int not null AUTO_INCREMENT,
+                business_license varchar(50) not null,
+            	order_date varchar(10) not null,
+            	order_time varchar(10) not null,
+            	id varchar(10) not null,
+            	address varchar(100) not null,
+            	phone varchar(15) not null,
+            	request varchar(10) not null,
+            	cart_num int not null,
+            	total varchar(10) not null,
+            	pay varchar(15) not null,
+            	state varchar(5) not null,
+                primary key(no)              
+                )";
+    
         if(mysqli_query($con, $sql)){
           echo "<script>
-            alert('order 테이블이 생성되었습니다!');
+            alert('order_list 테이블이 생성되었습니다!');
           </script>";
         }else{
           echo "<script>
-            alert('order 테이블 생성실패');
+            alert('order_list 테이블 생성실패');
           </script>";
         }
       }  
     
-      $sql= "select * from order where id='$id' order by no desc";  
+      $sql= "select * from order_list where id='$id' order by no desc";  
       $result= mysqli_query($con, $sql);  
       
       if($row=mysqli_fetch_row($result)){
@@ -49,9 +82,7 @@
          $phone=$row['phone'];
       }  
       mysqli_close($con);
-
  ?>
-
 
 
 <!DOCTYPE html>
@@ -60,7 +91,7 @@
 	<meta charset="utf-8">
     <title>배달의신 - 결제하기</title>
     <link rel="stylesheet" href="../common_css/common.css?v=1">
-    <link rel="stylesheet" href="./css/order_form.css?v=6">
+    <link rel="stylesheet" href="./css/order_form.css?v=7">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
 	function loadData(){
@@ -180,7 +211,7 @@
 			</table>
 		</div><!-- end of pay_info -->		
 		<div class="pay_btn">
-			<button id="pay_ok_btn" onclick="orderOk()">결 제 하 기</button><button id="pay_cancel_btn" type="button onclick="javascript:history.go(-1)">취 소 하 기</button>
+			<button id="pay_ok_btn" type="button" onclick="orderOk()">결 제 하 기</button><button id="pay_cancel_btn" type="button" onclick="javascript:history.go(-1)">취 소 하 기</button>
 		</div>
 		
 	</div><!-- end of order -->		
