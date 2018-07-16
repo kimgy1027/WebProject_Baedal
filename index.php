@@ -1,7 +1,7 @@
 <?php 
     session_start();
     
-    
+    $_SESSION[user] = "admin";
     include './common_lib/common.php';
     
     $flag = "NO";
@@ -36,7 +36,7 @@
 <meta charset="UTF-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="./slide/css/slide.css?v=1"> 
-<link rel="stylesheet" href="./common_css/index_style.css?v=16">
+<link rel="stylesheet" href="./common_css/index_style.css?v=4">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>  
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
