@@ -1,6 +1,8 @@
 <?php 
     session_start();
+    $_SESSION[user] = "admin";
     
+    include './common_lib/common.php';
     
     $flag = "NO";
     $sql = "show tables from web_baedal_DB";
