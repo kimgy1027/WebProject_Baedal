@@ -77,6 +77,8 @@
         }
     }
     
+    $sql = "delete from menu where registation_number = '$registration_number'";
+    mysqli_query($con, $sql);
     
     for($i = 0; $i<$count ; $i++){
         $sql = "insert into menu (registration_number, category_name, menu_name, menu_comp,";
@@ -86,13 +88,18 @@
         mysqli_query($con, $sql);  // $sql 에 저장된 명령 실행
     }
     
+    
+    $sql = "UPDATE store_regi SET menu_ok = 'Y'  WHERE business_license = '$registration_number'";
+    mysqli_query($con, $sql);
+        
    
     
     mysqli_close($con);  
     
     echo "
 	   <script>
-	    location.href = './menu_manage_form.php';
+        alert('메뉴가 등록 되었습니다.');
+	    history.go(-1);
 	   </script>
 	";
     

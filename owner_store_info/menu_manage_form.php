@@ -12,7 +12,6 @@
         $business_license =$_POST[business_license];
     }
     
-    $business_license = '123456';
     
     $sql = "select * from store_regi where business_license='$business_license'" ;
    $result  = mysqli_query($con, $sql);
@@ -21,23 +20,16 @@
   
   $store_delivery_area_str=$row[store_delivery_area];
   $store_delivery_area_araay=explode("/", $store_delivery_area_str);
- 
   $store_name = $row[store_name];
   $business_license = $row[business_license];
-  
   $store_delivery_time = $row[store_delivery_time];
   
   
+ 
   
   
-  $sql = "select * from menu where registration_number = '$business_license' order by registration_number";
-  $result  = mysqli_query($con, $sql);
-  
-  $row  = mysqli_fetch_array($result);
-  
-  
-  
-  
+  $sql2 = "select distinct category_name from menu where registration_number = '$business_license' order by category_name";
+  $category_num_result = mysqli_query($con, $sql2);
    
 ?>
 
@@ -326,64 +318,65 @@
                           <form class='insert_form' name="insert_form" method="post" action="./menu_insert.php"  enctype="multipart/form-data">
 							<input name="registration_number" type="hidden" value="<?=$business_license?>">	
                               	<?php 
-                              	while($row = mysqli_fetch_array($result)){
-                              	    $category_name = $row[category_name];
-                              	    $menu_name = $row[menu_name];
-                              	    $menu_comp = $row[menu_comp];
-                              	    $menu_price = $row[menu_price];
-                              	    $menu_img = $row[menu_img];
-                              	    $dir_menu_img = "./menu_img_data/".$menu_img;
-                              	   
-                              	?>    
-                          	<div class='category_area'>
-                				<div class='category_section'>
-                					<h1 class='category_h1'><?= $category_name ?></h1>
-                					<input class='del_category_btn' type='button' onclick='del_category(this)' value='카테고리 전체 삭제'>
-                				</div>
-							<?php 
-                          	    
+                              	for(;$category_row = mysqli_fetch_array($category_num_result);){
                               	    
-							while($row[category_name] == $category){
-							?>
-								<div class='menu_info'>
-                    			<div class='mn_info_input'>
-                        			    <input class='ctgr_name' name='category_name[]' type='text' value='<?= $category_name ?>' readonly><br>
-                        				<input class='mn_name' name='menu_name[]' type='text' value=''<?= $menu_name ?>'' readonly><br>
-                        			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
-                        			    <input class='mn_price' name='menu_price[]' type='text' value=''<?= $menu_price ?>'' readonly><br>
-                    			    </div>
-                    			    	<div class='img_area'>
-                    			    		<input class='mn_img' name='menu_img[]' type='file' onchange='handleImgFileSelect(this)'><br>
-                    			    		 <img class='sel_img' src='<?= $dir_menu_img?>' accept='image/gif,image/jpeg,image/png' />
-                    			   	 	</div>
-                    			    <input class='del_btn' type='button' onclick='del_menu(this)' value='현재 메뉴 삭제'>
-                    	   		</div>		
+                              	    $category=$category_row[category_name];
+                              	   
+                              	  
+
+                              ?>
+                              	     <div class='category_area'>
+                        				 <div class='category_section'>
+                        					<h1 class='category_h1'><?= $category ?></h1>
+                        					<input class='del_category_btn' type='button' onclick='del_category(this)' value='카테고리 전체 삭제'>
+                        				</div> 
+  
+                                   <?php 
+                                   $sql = "select * from menu where registration_number = '$business_license' and category_name = '$category' order by category_name";
+                                   $result  = mysqli_query($con, $sql);
+                                   for(;$row = mysqli_fetch_array($result);){
+                                       
+                                       $category_name = $row[category_name];
+                                       $menu_name = $row[menu_name];
+                                       $menu_comp = $row[menu_comp];
+                                       $menu_price = $row[menu_price];
+                                       $menu_img = $row[menu_img];
+                                       $dir_menu_img = "./menu_img_data/".$menu_img;
+                                   ?>
+                                    <div class='menu_info'>
+                        			<div class='mn_info_input'>
+                            			    <input class='ctgr_name' name='category_name[]' type='text' value='<?= $category_name ?>' readonly><br>
+                            				<input class='mn_name' name='menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
+                            			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
+                            			    <input class='mn_price' name='menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
+                        			    </div>
+                        			    	<div class='img_area'>
+                        			    		<input class='mn_img' name='menu_img[]' type='file' onchange='handleImgFileSelect(this)'><br>
+                        			    		 <img class='sel_img' src='<?= $dir_menu_img?>' accept='image/gif,image/jpeg,image/png' />
+                        			   	 	</div>
+                        			    <input class='del_btn' type='button' onclick='del_menu(this)' value='현재 메뉴 삭제'>
+                        	   		</div>	
+                                   			
+                                   
+                                   
+                                   <?php     
+                                       
+                                   }
+                                  	    
+                                   ?>
+                              	            <div class='add_menu'>
+                        						<input class='category_name' type='text' value='<?= $category_name ?>'> <br>
+                        						<input class='menu_name' type='text' placeholder='메뉴명'><br>
+                        					    <textarea class='menu_comp' placeholder='메뉴구성'></textarea><br>
+                        					    <input class='menu_price' type='text' placeholder='가격'><br>
+                        					    <input class='menu_insert_btn' type='button' value='메뉴추가' onclick='add_menu(this)'>*메뉴추가 이후에 이미지를 설정해 줄 수 있습니다!
+                        			    	</div>
+                        				</div>    
+                              	    <?php
 							
-							<?php 
-							         $category = $row[category_name];
-							     }
-							?>
-					<div class='add_menu'>
-						<input class='category_name' type='text' value='<?= $category_name ?>'> <br>
-						<input class='menu_name' type='text' placeholder='메뉴명'><br>
-					    <textarea class='menu_comp' placeholder='메뉴구성'></textarea><br>
-					    <input class='menu_price' type='text' placeholder='가격'><br>
-					    <input class='menu_insert_btn' type='button' value='메뉴추가' onclick='add_menu(this)'>*메뉴추가 이후에 이미지를 설정해 줄 수 있습니다! "+
-			    	</div>
-			</div>    
-                          	  <?php
-                          	 
-                          	 
-                          	}
-                          	?>
-                  
-                          	 
-                          	
-                          
-                          
-                          
-                          
-                          
+                         }
+                              	    ?> 
+                
                             
 								<div class="a">
 								<input class="insert_input" type="text" placeholder="추가시킬 카테고리명을 입력하세요!"> <input class="ctgr_insert_btn" type="button" value="추가" onclick='add_category()'>

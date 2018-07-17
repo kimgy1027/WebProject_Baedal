@@ -6,24 +6,36 @@
     
     if(!$_SESSION[user] || !$_SESSION[id]){
         echo "<script> 
-                   alert('로그인후 이용하여 주세요~!');
+                   alert('로그인후 이용하여 주세요~!S');
                     history.go(-1);
                 </script>";
-    }else if(!$_GET[search]){
+    }else if(!$_GET[town]){
         echo "<script>
                    alert('읍면동을 입력하신후 이용해 주세요!');
                     history.go(-1);
                 </script>";
     }else{
-        $search = $_GET[search];
+        $town = $_GET[town];
+         if(isset($_GET[search])){
+            $search=$_GET[search];
+            
+            $sql = "select * from store_regi where store_type = '$search' and store_delivery_area like '%$town%'";
+        }else{
+            $sql = "select * from store_regi where store_type = '$search'";
+            
+        } 
+       
         
     }
-    $sql = "select * from store_regi where store_type = '$search'";
+    
+    
     
     $result = mysqli_query($con, $sql);
     
-    $row = mysqli_fetch_array($result);
     
+    $record_num = mysqli_num_rows($result);
+    
+    $row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +66,7 @@
 	</nav>
 
 	<div class="store_top">
-		<div id="store_head"><?php ?> 주변 음식점 <?php ?>곳을 찾았습니다!</div>
+		<div id="store_head"><?= $search ?> 주변 음식점 <?= $record_num?>곳을 찾았습니다!</div>
 		
 		
 		<div id="store_head_list">
@@ -82,6 +94,15 @@
 	<hr>
 
 	<div class="store_list">
+	<?php 
+	while(1){
+	    
+	    
+	}
+	
+	
+	?>
+	
 	
 	
 		<div class="store_list_info1">
@@ -121,6 +142,7 @@
 					<td>			
 			</table>
 		</div>
+		
 
 
 	</div>
