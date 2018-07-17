@@ -181,7 +181,7 @@ form {
 	background: #F9F0DA;
 	color: #9E9C9C;
 	font-size: 15pt;
-	font-family:NANUMSQUARER; 
+	font-family:NANUMSQUARER; 	 /* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
 }
 
 .search .btn_submit {
@@ -196,7 +196,7 @@ form {
 }
 
 .search .btn_submit:before {
-	font-family:NANUMSQUARER; 
+	font-family:NANUMSQUARER; 	/* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
 	font-size: 16px;
 	color: #F9F0DA;
 }
@@ -218,7 +218,6 @@ form {
   position: absolute;
   display: none;
   top: 200px;
- 
   width:400px;
   left: 400px;
   right:400px;
@@ -232,7 +231,7 @@ form {
  
 .form input{	   /* 아이디패스워드 쓰는 텍스트창의 내부 */
   /* font-family: "Roboto", sans-serif; */
-  font-family: 'NANUMSQUARER';
+  /* font-family: 'NANUMSQUARER'; */		/* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -246,7 +245,6 @@ form {
 .form #id {  /* 로그인 아이디찾기 비번찾기 회원가입 버튼 */
   /* font-family: "Roboto", sans-serif; */
   display: block;
-  font-family: 'NANUMSQUARER';
   font-weight:bold;
   text-transform: uppercase;
   background: #2ac1bc;
