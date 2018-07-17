@@ -1,7 +1,10 @@
 <?php 
     session_start();
+<<<<<<< HEAD
+=======
     
     $_SESSION[user] = "admin";
+>>>>>>> e56dec9a1a4629e0a9d01edae20716453dd07466
     include './common_lib/common.php';
     
     $flag = "NO";

@@ -22,11 +22,11 @@
 <meta charset="utf-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="../common_css/common.css?v=1">
-<link rel="stylesheet" href="./css/owner_store_list_style.css?v=4">
+<link rel="stylesheet" href="./css/owner_store_list_style.css?v=5">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>	
 		function tableClicked(){
-			window.location.href="../owner_menu/menu_manage_form.php";
+			document.store_form.submit();
 		}
 
 	</script>
@@ -80,6 +80,7 @@
 		    $owner_name = $row['owner_name'];
 		    $owner_store_name = $row['owner_store_name'];
 		    $owner_address = $row['owner_address'];
+		    $business_license = $row['business_license'];
 		    $business_license_img = $row['business_license_img'];
 		    $store_name = $row['store_name'];
 		    $store_type = $row['store_type'];
@@ -106,14 +107,17 @@
 		    $menu_ok = $row['menu_ok'];
 		?>
 		
-		
+		<form action="../owner_store_info/menu_manage_form.php" method="post" name="store_form">
+		<input name="business_license" type="hidden" value="<?= $business_license ?>">
 		<div class="store_list_info1">
 			<!-- DB에서 불러온 가게수에 따라서 div 생성하면댄다 >내부 내용도 써야함 -->
+		
 			<table onclick="tableClicked()" id="store_table">
+			
 				<tr>
-					<td rowspan="4" id=store_list_img><img src="./Regi_logo_img_data/<?=$store_logo_img ?>" >					
+					<td rowspan="4" id=store_list_img><img id="store_logo_img" src="./Regi_logo_img_data/<?=$store_logo_img ?>" >					
 					<td><?=$store_name ?>				
-					<td>구현할까?				
+					<td>쿠폰				
 				<tr>
 					<td>별점 테이블 필요				
 					<td>???? 좋아요 ??
@@ -127,15 +131,15 @@
 		</div>
 					
 		<div class="store_list_info2">
-			<table>
+			<!--<table>
 				<tr class="tr1"><td colspan="2" >영 업 상 태
-				<tr class="tr2"><td id="td1" colspan="2" rowspan="2">영 업 종 료<?php ?>
+				<tr class="tr2"><td id="td1" colspan="2" rowspan="2">영 업 종 료
 				<tr class="tr2">
 				<tr class="tr3"><td id="td1"><?= $store_delivery_time_start ?>/<?= $store_delivery_time_end ?><td>13:00:00
 				<tr class="tr4"><td id="td1">총 주문 수<td>17
-			</table>		
+			</table>	 -->	
 		</div><!-- end of store_list_info2 -->
-		
+		</form>
 	<?php 
 		}
 	?>	

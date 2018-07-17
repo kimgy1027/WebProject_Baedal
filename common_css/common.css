@@ -15,6 +15,7 @@ body {
 	overflow: scroll;
 	font-family: NANUMSQUARER;
 	border: 1px solid black; /*실 선 */
+	font-weight: bold;
 }
 
 header {

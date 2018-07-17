@@ -132,7 +132,7 @@ if (!$store_logo_error && !$business_upfile_error)
       store_delivery_time varchar(50) not null,
       store_day_off varchar(50) not null,
       store_phone varchar(50) not null,
-      store_delivery_area varchar(50) not null,
+      store_delivery_area varchar(255) not null,
       store_logo_img varchar(50) not null,
       regi_date varchar(20) not null,
       regi_ok varchar(2) default 'N',

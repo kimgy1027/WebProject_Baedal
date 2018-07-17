@@ -1,10 +1,28 @@
-﻿<!DOCTYPE html>
+﻿<?php 
+session_start();
+$_SESSION['id'] = "een0422";
+$_SESSION['nick'] = "귀요미";
+
+$id = $_SESSION['id'];
+$nick = $_SESSION['nick'];
+
+// include "../common_lib/common.php";
+
+// $sql= "select pass from membership where id='$id'";
+// $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
+// $row=mysqli_fetch_rows($result);
+
+// $pass=$row['pass'];
+
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
-    <link rel="stylesheet" href="../common_css/common.css">
-    <link rel="stylesheet" href="./css/user_info.css">
+    <link rel="stylesheet" href="../common_css/common.css?v=2">
+    <link rel="stylesheet" href="./css/user_info.css?v=2">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 </head>
@@ -30,8 +48,8 @@
    	<div class="my_info">
     	<p>아이디 정보</p>
     	<table>
-        <tr><td class="td1">아이디<td class="td2">id
-        <tr><td class="td1">닉네임<td class="td2"><input type="text" value="nick"><button type="button">변 경</button>
+        <tr><td class="td1">아이디<td class="td2"> <?=$id ?>
+        <tr><td class="td1">닉네임<td class="td2"><input type="text" value="<?= $nick ?>"><button type="button">변 경</button>
         <tr><td class="td1">비밀번호<td class="td2"><input type="password" value="pass"><button type="button">변 경</button>
         </table>
     </div>
@@ -41,6 +59,10 @@
     	<table>
         
         </table>
+    </div>
+    <div class="review_info">
+    	<p>리뷰 관리</p>
+    
     </div>
    </div>
 <footer>

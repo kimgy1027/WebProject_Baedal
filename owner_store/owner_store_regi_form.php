@@ -266,14 +266,21 @@
 			var search = $("#asearch").val();
     		$.ajax({
 				type : "post",
-				url : "../search/search_result.php",
+				url : "../search/search_result2.php",
 				data : "search="+search,
 				success : function(data){
 					$("#src_rst").show();
 					$("#s_r_l").html(data);
+					
 				}
 			});
 		}
+    	
+    	function insert_textarea(elem){
+    		 $("#store_delivery_area").val($("#store_delivery_area").val() + $(elem).val() + "/");
+    	}
+    	
+    	
     	
     	
     	
@@ -355,8 +362,8 @@
                                             <option value="064">064</option>
                                          </select> - <input type="text"  name="store_phone2" id="block3"> - <input type="text"  name="store_phone3" id="block3">
         		<tr><td class="td1">배달가능지역<td class="td2">
-        		<input id="asearch" type="text" placeholder="예)동 이름을 입력해주세요"> <div id="src_rst"><div id="s_r_l" style="border: 1px solid black;"></div></div>
-        		<textarea name="store_delivery_area"></textarea>
+        		<input id="asearch" type="text" placeholder="예)동 이름을 입력해주세요" onkeyup="search_func()"> <div id="src_rst"><div id="s_r_l" style="border: 1px solid black;"></div></div>
+        		<textarea name="store_delivery_area" id="store_delivery_area"></textarea>
         		<td><input class="content" type="file" id="store_logo_img" name="store_logo_img" onchange="handleImgFileSelect(this,1)"> 
         	</table>        	
     	</div><!-- end of store_info -->
