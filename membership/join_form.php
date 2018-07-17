@@ -175,7 +175,7 @@
 			}  */
 			
 			
-			document.join2_form.submit();
+			document.join_form.submit();
 		}
 
 
@@ -233,10 +233,10 @@ function cancel(){
 <img src="../images/baemin_logo.PNG" width="200px"><br><br>
 <p id="main" style="font:gray">회원가입</p>
 <div style="border : 0.5px solid gray;" ></div><br>
-<form name="join2_form" method="post" action="./insert.php" enctype="multipart/form-data">
-<div>*회원종류 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 점주2<input type="radio" class="ok" name="user" id="owner" onclick="manager()" value="점주" >
-이용자<input type="radio" id="user" class="ok" name="user" value="이용자"></div>
-<br>
+<form name="join_form" method="post" action="insert.php" enctype="multipart/form-data">
+<div>*회원종류&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 점주<input type="radio" class="ok" name="user" id="owner" onclick="manager()" value="점주" >
+이용자<input type="radio" id="user" class="ok" name="user" value="이용자"></div><br>
+
 <div>*아이디 <input type="text" style="margin-left: 80px" name="id" placeholder="2~10글자로 입력하세요.">
 <input class="ok" type="button" onclick="check_id()" value="중복확인"></div> 
 

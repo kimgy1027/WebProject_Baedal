@@ -35,7 +35,7 @@
 <meta charset="UTF-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="./slide/css/slide.css?v=1"> 
-<link rel="stylesheet" href="./common_css/index_style.css?v=8">
+<link rel="stylesheet" href="./common_css/index_style.css?v=16">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>  
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -59,6 +59,10 @@
 	
 	function hide_wrapper_view(){
 		$("#wrapper").hide();
+	}
+	
+	function hide_login_form(){
+		$(".form").hide();
 	}
 
 	function everyCheck(){
@@ -104,7 +108,7 @@
         }
 	
     	function check_id(){
-    			window.open("./membership/check_id.php?id="+document.join_form.id.value, "IDcheck", "left=200, top=200, width=420, height=350, scrollbars=no, resizable=yes");
+    			window.open("./membership/check_id.php?id="+document.join_form.id.value, "IDcheck", "left=200, top=200, width=500, height=320, scrollbars=no, resizable=no");
     	}
 	 
     	function check_nick(){
@@ -209,12 +213,11 @@
 	
 	/////////////////////////////////////////////////////검색기능///////////////////
     	function search_func(){
-    		$("#src_rst").hide();
-			var town= $("#asearch").val();
+			var search = $("#asearch").val();
     		$.ajax({
 				type : "post",
 				url : "./search/search_result.php",
-				data : "town="+town,
+				data : "search="+search,
 				success : function(data){
 					$("#src_rst").show();
 					$("#s_r_l").html(data);
@@ -247,11 +250,11 @@
 		
 		
 		<div class="search" >
-			<p id="p1"><br><p id="p2">우리동네를 입력해보세요!
+			<p id="p1" ><br><p id="p2" style="font-weight: normal;">우리동네를 입력해보세요!
            <form>
             <input id="asearch" type="text" placeholder="동 이름 검색" onkeyup="search_func()">
                 <div id="src_rst" >
-        			<div id="s_r_l"></div>
+        			<div id="s_r_l" style = ></div>
         		</div>
             <button class='btn_submit' type="submit"><img src="./common_img/search.png"></button>
             </form>
@@ -273,40 +276,43 @@
         
 	</section>
 	
-	
-	
-	
-	
-	
-	
 	<div class="form"> <!--  로그인창 div  -->
-	
-        <form name="login_form" action="./login/login_db.php" method="post" class="login-form">
-    <h1>저기요</h1>
- 	   <input type="text" placeholder="아이디" name="id"/>
-      <input type="password" name="pass" placeholder="패스워드" />
-      <div style="text-align: left">
-        <div class="clearfix" style="display:inline-block;">
-        </div>
-      </div>  
-      <!-- <small id="b"><input type="checkbox">로그인 상태 유지 </small> -->
-      <input type="button" id="id" onclick="input_check()" value="login">
-      <input type="button" id="id" onclick="find_pw()" value="비밀번호찾기">
-      <input type="button" id="id" onclick="show_wrapper_window()" value="회원가입">
-      <p class="message">우리팀화이팅<br><a href="#">(주)저기요</a></p>
-    </form>
+	    <form name="login_form" action="./login/login_db.php" method="post" class="login-form">
+	    <div style="text-align: right;">
+	    	<img id="x" src="./common_img/x.png" width="17px" onclick="hide_login_form()">
+	    </div>
+        <img src="./common_img/logo.JPG" width="150px">
+        <br>
+        <br>
+     	  <input type="text" placeholder="아이디" name="id"/>
+          <input type="password" name="pass" placeholder="패스워드"/>
+          <div style="text-align: left">
+            <div class="clearfix" style="display:inline-block;">
+            </div>
+          </div>  
+          <!-- <small id="b"><input type="checkbox">로그인 상태 유지 </small> -->
+          <input type="button" id="id" onclick="input_check()" value="login">
+          <input type="button" id="id" onclick="find_pw()" value="비밀번호찾기">
+          <input type="button" id="id" onclick="show_wrapper_window()" value="회원가입">
+          <br>
+          <p class="message">우리팀 화이팅<br><a href="#">(주)배달의신</a></p>
+                  
+        </form>
  	 </div><!-- END OF 로그인창 div   -->
  	 
  	 
  	 
- 	 <div id="wrapper">
-<img src="./common_img/logo.JPG" width="200px"><br>
+<div id="wrapper">
+<div style="text-align: right;">
+	<img id="x" src="./common_img/x.png" width="17px" onclick="hide_wrapper_view()">
+</div>
+<img src="./common_img/logo.JPG" width="150px"><br>
 <div class='all_check_div'>전체동의<input type="radio" name="agree" onclick="everyCheck()"></div>
 
 					
 				
 				
-<textarea rows="10" cols="120" readonly="readonly">
+<textarea rows="7" cols="120" readonly="readonly">
 제 1 조 (목적)
 이 약관은 주식회사 우아한형제들(이하 "회사”라 합니다)이 제공하는 배달의민족 서비스(이하 "서비스”라 합니다)와 관련하여, 회사와 이용 고객간에 서비스의 이용조건 및 절차, 회사와 회원간의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다. 본 약관은 PC통신, 스마트폰(안드로이드폰, 아이폰 등) 앱 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 준용됩니다. 
 
@@ -422,7 +428,7 @@
 
 
 
-<textarea rows="10" cols="120" readonly="readonly">
+<textarea rows="7" cols="120" readonly="readonly">
 제 1 조 (목적)
 이 약관은 주식회사 우아한형제들(이하 "회사”라 합니다)이 제공하는 배달의민족 서비스(이하 "서비스”라 합니다)와 관련하여, 회사와 이용 고객간에 서비스의 이용조건 및 절차, 회사와 회원간의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다. 본 약관은 PC통신, 스마트폰(안드로이드폰, 아이폰 등) 앱 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 준용됩니다. 
 
@@ -536,7 +542,7 @@
 </textarea>
 <div><u>전자금융거래 이용야관 동의</u><input type="checkbox"  name="check" ></div><br>
 
-<textarea rows="10" cols="120" readonly="readonly">
+<textarea rows="7" cols="120" readonly="readonly">
 제 1 조 (목적)
 이 약관은 주식회사 우아한형제들(이하 "회사”라 합니다)이 제공하는 배달의민족 서비스(이하 "서비스”라 합니다)와 관련하여, 회사와 이용 고객간에 서비스의 이용조건 및 절차, 회사와 회원간의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다. 본 약관은 PC통신, 스마트폰(안드로이드폰, 아이폰 등) 앱 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 준용됩니다. 
 
@@ -648,13 +654,13 @@
 1. “회원”의 "게시물"이 정보통신망법 및 저작권법 등 관련법에 위반되는 내용을 포함하는 경우, 권리자는 관련법이 정한 절차에 따라 해당 "게시물"의 게시중단 및 삭제 등을 요청할 수 있으며, 회사는 관련법에 따라 조치를 취하여야 합니다. 
 
 </textarea>
-<div><u>개인정보 수집이용 동의</u>><input type="checkbox" name="check" ></div><br>
+<div><u>개인정보 수집이용 동의</u><input type="checkbox" name="check" ></div><br>
 
 <div>마케팅 정보 메일 SMS 수신동의(선택)<input type="checkbox" ></div><br>
 <div>만 14세 이상 고객만 가입가능 합니다. <u>내용보기</u><input type="checkbox" name="check" ></div><br>
 <div>배달의민족은 만 14세 미만 아동의 회원가입을 제한하고 있습니다.</div><br>
 <div>
-<button name="next" onclick="check()" name="next">다음으로</button>
+<button name="next" onclick="check()" name="next">다음으로</button>&nbsp;&nbsp;&nbsp;
 <button name="next" onclick="hide_wrapper_view()" name="next">취소하기</button>
 
 
@@ -662,46 +668,51 @@
 </div>
 
 <div id="sign_up">
-<img src="./common_img/logo.JPG" width="200px"><br><br>
+
+<img src="./common_img/logo.JPG" width="150px">
 <p id="main">회원가입</p>
-<div style='border : 0.5px solid gray;' ></div><br>
-<form style='berder : 1px solid green;' name="join_form" method="post" action="./membership/insert.php">
-    <table>
-    	<tr style='border: 1px solid black;'>
-    		<td>*회원종류</td>
-    		<td>이용자<input type="radio" id="user" class="ok" name="user" value="user"></td>
-    		<td>점주<input type="radio" class="ok" name="user" id="owner" value="owner" ></td>
+<hr>
+<div class="sign_up_div">
+<form name="join_form" method="post" action="./membership/insert.php">
+    <table >
+    	<tr class="tr1">
+    		<td class="td1"><font>* </font>회원종류</td>
+    		<td><input type="radio" id="user" class="ok" name="user" value="user" checked="checked">이용자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		 <input type="radio" class="ok" name="user" id="owner" value="admin">점주</td>
+    	 	<td>
     	</tr>
-    	<tr>
-    		<td>*아이디</td>
+    	<tr class="tr2">
+    		<td class="td1"><font>* </font>아이디</td>
     		<td><input type="text" name="id" placeholder="중복확인을 클릭해 주세요!" readonly="readonly"></td>
-    		<td><input class="ok" type="button" onclick="check_id()" value="중복확인" ></td>
+    		<td><input class="ok" type="button" onclick="check_id()" value="중복확인" id="btn1"></td>
     	</tr>
-    	<tr>
-    		<td>*닉네임 </td>
+    	<tr class="tr3">
+    		<td class="td1"><font>* </font>닉네임 </td>
     		<td><input type="text" name="nick" placeholder="중복확인을 클릭해 주세요!" readonly="readonly"></td>
-    		<td><input class="ok" type="button" value="중복확인" onclick="check_nick()"></td>
+    		<td><input class="ok" type="button" value="중복확인" onclick="check_nick()" id="btn1"></td>
     	</tr>
     	
-    	<tr>
-    		<td>*이메일</td>
+    	<tr class="tr4">
+    		<td class="td1"><font>* </font>이메일</td>
     		<td><input type="text" name="email" placeholder="인증하기를 클릭해 주세요!" id="confirm" readonly="readonly"></td>
-    		<td><input class="ok" type="button" value="인증하기" onclick="check_email()"></td>
+    		<td><input class="ok" type="button" value="인증하기" onclick="check_email()" id="btn1"></td>
     	</tr>
     	
-    	<tr>
-    		<td>*비밀번호 <!-- <input type="hidden" name="email_num2" > --></td>
+    	<tr class="tr5">
+    		<td class="td1"><font>* </font>비밀번호 <!-- <input type="hidden" name="email_num2" > --></td>
     		<td> <input type="password" name="pass" placeholder="8~20자로 입력하세요."></td>
     	</tr>
-    	<tr>
-    		<td>*비밀번호 확인 </td>
-    		<td><input type="password" name="passcheck" placeholder="8~20자로 입력하세요."> </td>
+    	<tr class="tr6">
+    		<td class="td1"><font>* </font>비밀번호 확인 </td>
+    		<td><input type="password" name="passcheck" placeholder="8~20자로 입력하세요." > </td>
     	</tr>
     </table>
-
-<button type='button' class="ok"  onclick="check_input()">가입하기 </button>
-<button type='button' class="ok"  onclick="join_form_hide()"> 취소하기</button>
+    <div class="sign_up_btns">
+        <button type='button' class="ok"  onclick="check_input()">가입하기 </button>&nbsp;&nbsp;&nbsp;
+        <button type='button' class="ok"  onclick="join_form_hide()"> 취소하기</button>
+    </div>
 </form>
+</div><!-- end of sign up div -->
 </div>
 	
 	<footer>

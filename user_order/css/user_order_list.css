@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+.order_info{
+	width: 1100px;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.order_list{
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px solid blue;
+}
+
+.order_list table{
+	width: 100%;
+	height: 110px;
+	border: 2px solid black;	
+	margin-top: 20px;
+}
+
+.order_list .tr1 .td1{
+	border: 1px solid black;
+}
+.order_list .td1{
+	width: 160px;
+}
+.order_list .tr1 .td2{
+	font-size: 15pt;
+}
+.order_list .td2, .td3{
+	padding-left: 20px;
+}
+.order_list .td4{
+	width: 200px;
+	text-align: center;
+}
+
+.order_list .tr1, .tr2, .tr3{
+	height: 30px;
+}
+/*배달 내역 없을 때 이미지 스타일*/
+.order_info #no_order_img{
+	margin: 100px 17% 150px 17%;
+	width: 700px;
+}
+/*상태 스타일*/
+.order_list .tr1 #state{
+	font-size: 15pt;
+	background-color: gray;
+	color: white;
+	font-weight: normal;
+}
+.order_list button{
+	font-size: 14pt;
+	padding: 10px 60px 10px 60px;
+	border-radius: 7px;
+}
+.order_list .tr2 button{
+	background-color: #1dbca8;
+	color: white;
+}
+.order_list .tr3 button{
+	background-color: #ffffff;
+}
+.order_list .tr1 img{
+	height: 35px;
+}
+
+.order_list .tr2 img, .tr3 img{
+	height: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

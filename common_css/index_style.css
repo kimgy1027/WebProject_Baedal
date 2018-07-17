@@ -14,6 +14,7 @@ body {
 	margin: 0 0 0 0;
 	overflow: scroll;
 	font-family: NANUMSQUARER;
+	font-weight : bold;
 	border: 1px solid black; /*실 선 */
 }
 
@@ -164,7 +165,7 @@ d1:after{
 	background: rgba(200, 255, 200, 0.1);
 }
 
-form {
+.search form {
 	position: relative;
 	width: 310px;
 	height: 400px;
@@ -181,7 +182,7 @@ form {
 	background: #F9F0DA;
 	color: #9E9C9C;
 	font-size: 15pt;
-	font-family:NANUMSQUARER; 	 /* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
+	font-family:NANUMSQUARER; 	
 }
 
 .search .btn_submit {
@@ -196,7 +197,7 @@ form {
 }
 
 .search .btn_submit:before {
-	font-family:NANUMSQUARER; 	/* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
+	font-family:NANUMSQUARER; 
 	font-size: 16px;
 	color: #F9F0DA;
 }
@@ -217,7 +218,7 @@ form {
   padding: 10px;
   position: absolute;
   display: none;
-  top: 200px;
+  top: 200px; 
   width:400px;
   left: 400px;
   right:400px;
@@ -228,10 +229,14 @@ form {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+#x:hover{
+	cursor: pointer;
+}
+
  
 .form input{	   /* 아이디패스워드 쓰는 텍스트창의 내부 */
   /* font-family: "Roboto", sans-serif; */
-  /* font-family: 'NANUMSQUARER'; */		/* 이거는 텍스트에 입력하고있는 값을 안보이게 할수있다.  */
+  font-family: 'NANUMSQUARER';
   outline: 0;
   background: #f2f2f2;
   width: 100%;
@@ -245,6 +250,7 @@ form {
 .form #id {  /* 로그인 아이디찾기 비번찾기 회원가입 버튼 */
   /* font-family: "Roboto", sans-serif; */
   display: block;
+  font-family: 'NANUMSQUARER';
   font-weight:bold;
   text-transform: uppercase;
   background: #2ac1bc;
@@ -274,7 +280,6 @@ form {
 }
 
 
-
 .close_div {
 	float: right;
 }
@@ -287,10 +292,11 @@ form {
   padding: 10px;
   position: absolute;
   display: none; 
-  top: 50px;
   width: 900px;
-  margin: 0 auto 0 auto;
-  left: 210px;
+  margin-left: -450px;
+  margin-top: -480px;
+  top: 50%;
+  left: 50%;
   z-index: 30;
   background: #FFFFFF;
   text-align: center;
@@ -333,37 +339,77 @@ form {
   padding: 10px;
   position: absolute;
   display: none; 
+  margin-left: -300px;
+  margin-top: -250px;
+  top: 50%;
+  left: 50%;
   height: 500px;
-  top: 50px;
-  width: 900px;
-  left: 210px;
+  width: 600px;
   z-index: 60;
   background: #FFFFFF;
-  text-align: left;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-
-
+/*가입하기 취소하기 버튼 스타일*/
 #sign_up button{
       font-family: 'NANUMSQUARER';
 	  font-weight:bold;
-	  text-transform: uppercase;
 	  background: #2ac1bc;
-	  width: 100px;
+	  width: 110px;
 	  border: 0;
-	  padding: 15px;
+	  padding: 14px;
 	  color: #FFFFFF;
-	  font-size: 15px;
-	  -webkit-transition: all 0.3 ease;
-	  transition: all 0.3 ease;
+	  font-size: 18px;
 	  cursor: pointer;
- 	  text-decoration: none;
+	  font-weight: normal;
+ 
 }
 
 #sign_up table{
-	
+	margin: 0 auto;
+	border: 1px dashed #c6c6c6;
 }
 
+.sign_up_div{
+  	width: 100%;
+  	margin: 0 auto;
+}
+.sign_up_div .td1{
+  width: 130px;
+}
+.sign_up_btns{
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+.sign_up_div td{
+	height: 40px;
+}
+.sign_up_div font{
+	color: #f5150a;
+}
+.sign_up_div input{
+	height: 34px;
+	font-size: 10pt;
+	vertical-align: middle;
+}
+.sign_up_div .tr1 td{
+	line-height: 40px;
+}
+.tr1 input{
+ 	font-family: 'NANUMSQUARER';
+	height: 22px;
+}
+/*인증하기 버튼 스타일*/
+#btn1{
+	font-family: 'NANUMSQUARER';
+	font-weight: bold;
+	background-color: #efa369;
+	border: none;
+	border-radius: 3px;
+}
+#btn1:hover{
+	cursor: pointer;
+}
 
 
 

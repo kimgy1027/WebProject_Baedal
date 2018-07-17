@@ -135,3 +135,6 @@ footer {
 	height: 120px;
 }
 
+button:hover{
+	cursor: pointer;
+}

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'NANUMSQUARER';
+	src: url(../../common_css/font/NANUMSQUARER.ttf);
+}
+
+.wrap #text1{
+	font-size: 11pt;
+	font-weight: bold;
+}
+.wrap{
+	border: 2px solid #2AC1BC;
+	border-radius: 5px;
+	padding: 10px;
+	font-family: 'NANUMSQUARER';
+}
+
+.wrap input{
+	height: 27px;
+	font-size: 11pt;
+   font-family: 'NANUMSQUARER';
+}
+
+.wrap #search{
+	vertical-align: middle;
+}

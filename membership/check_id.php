@@ -21,7 +21,7 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 <html>
 <head>
 	<meta charset=utf-8>
-	<link href="../css/join.css?v=1" rel=stylesheet>
+	<link href="./css/join.css?v=2" rel=stylesheet>
 </head>
 <script>
 	// 요소 검사 함수
@@ -58,10 +58,10 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 
 </script>
 <body>
-	<div id=wrap>
+	<div class="wrap">
 		<div id=id_check_title>
-			<div id=id_check_title1><img src=../image/pop_idcomf.gif></div>
-			<div id=id_check_title2><a href="#"><img src=../image/pop_login_close.gif onclick="closer()"></a></div>
+			<div id=id_check_title1><img src="./images/아이디중복확인.jpg" height="30px"></div>
+			<hr>
 		</div>
 		<div class=clear></div>
 		<div id=hr_line></div>
@@ -72,8 +72,8 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 		</div>
 		<br>
 		<form name=id_check_form method=get action="check_id.php">
-		<div align=center>
-			<input type="text" name="id" value="<?=$id?>"> <a href="#"><img src="../image/idComF.gif" onclick="id_check()"></a>
+		<div align="center">
+			<input type="text" name="id" value="<?=$id?>"> <a href="#"><img id="search" src="./images/검색.jpg" height="30px" onclick="id_check()"></a>
 		</div>
 		</form>
 		<br>
