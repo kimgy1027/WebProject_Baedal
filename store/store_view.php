@@ -1,5 +1,9 @@
 <?php 
     session_start();
+    
+    $owner_num = $_POST[owner_num];
+    var_dump($owner_num);
+    exit;
 ?>
 
 <!DOCTYPE html>

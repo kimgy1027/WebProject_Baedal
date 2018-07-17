@@ -119,7 +119,7 @@ if (!$store_logo_error && !$business_upfile_error)
   
   if($flag !=="OK"){
       $sql = "create table store_regi(
-      owner_num int(5) not null AUTO_INCREMENT,
+      no int(5) not null AUTO_INCREMENT,
       owner_id varchar(10) not null,
       owner_name varchar(10) not null,
       owner_store_name varchar(50) not null,
@@ -174,7 +174,7 @@ if (!$store_logo_error && !$business_upfile_error)
   mysqli_close($con);
   
   echo "<script>alert('매장 등록 신청이 완료되었습니다.')</script>";
-  echo "<script> location.href='../index.php'; </script>";
+  echo "<script> location.href='../owner_store/owner_store_list.php'; </script>";
   
 
 

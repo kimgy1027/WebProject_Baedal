@@ -129,4 +129,9 @@ body{
 	border: 1px solid black;
 }
 
+#store_list_img img{
+	width : 100px;
+	heigth : 100px;
+}
+
 

@@ -10,10 +10,10 @@ $count=10;
 
 while($row= mysqli_fetch_array($result)){
     $search_value = $row[0];
-    $trim_search_value = str_replace(" ", "", $search_value);
+    /* $trim_search_value = str_replace(" ", "", $search_value); */
     
     
-    $rs_href = "store/store_list.php?town=".$trim_search_value;
+    $rs_href = "./store/store_list.php?town=".$search_value;
     
     
     echo "<a href='$rs_href'><div style='padding : 5px 5px; border-bottom : 1px solid #dddddd; background-color: white;'>".$search_value."</div></a>";
