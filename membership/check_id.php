@@ -21,7 +21,7 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 <html>
 <head>
 	<meta charset=utf-8>
-	<link href=../css/join.css rel=stylesheet>
+	<link href="../css/join.css?v=1" rel=stylesheet>
 </head>
 <script>
 	// 요소 검사 함수

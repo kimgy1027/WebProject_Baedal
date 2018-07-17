@@ -669,7 +669,7 @@
     	<tr style='border: 1px solid black;'>
     		<td>*회원종류</td>
     		<td>이용자<input type="radio" id="user" class="ok" name="user" value="user"></td>
-    		<td>점주<input type="radio" class="ok" name="user" id="owner" value="admin" ></td>
+    		<td>점주<input type="radio" class="ok" name="user" id="owner" value="owner" ></td>
     	</tr>
     	<tr>
     		<td>*아이디</td>
