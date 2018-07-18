@@ -11,8 +11,6 @@ $pass=$_POST['new_pass'];
 
  $sql="update membership set pass='$pass' where email='$email'"; 
 /* $sql="update find set pass='$new_pass'"; */
- var_dump($sql);
- var_dump($email);
 
 $result=mysqli_query($con, $sql) or die("오류ㅋㅋㅋㅋ : " . mysqli_error($con));
 

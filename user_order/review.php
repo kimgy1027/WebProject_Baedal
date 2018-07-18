@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['nick']="으녕";
 
 $no=$_GET['no']; //가게의 PK
 $nick=$_SESSION['nick'];

@@ -1,6 +1,5 @@
 <?php 
 session_start();
-$_SESSION['id'] = "een0422";
 
 $id = $_SESSION['id'];
 
