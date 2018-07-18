@@ -27,7 +27,7 @@ if(isset($_SESSION[user]) && $_SESSION[user] == "admin"){
 }elseif (isset($_SESSION[user]) && $_SESSION[user] == "user"){
 ?>
 <ul class="login">
-  <li> <a href="#">정보수정</a></li>
+  <li> <a href="./user_info/confirm_pw.php">정보수정</a></li>
   <li> <a href="#" >주문내역</a> &nbsp;&nbsp;|</li>
   <li> <a href="./login/logout.php" >로그아웃</a> &nbsp;&nbsp;|</li>
 </ul>
