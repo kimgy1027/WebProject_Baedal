@@ -2,15 +2,14 @@
 
 .form {     /* 작은 창 폼 */
   position: relative;
-  width:1360px;
+  width:100%;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 1360px;
+  max-width: 600px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  
 }
 
 .form input{	   /*  텍스트창의 내부 */
@@ -21,7 +20,7 @@
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 16px;
   font-weight:bold;
 }
 .form button {  /* 버튼 */
@@ -33,7 +32,7 @@
   border: 0;
   padding: 15px;
   color: #FFFFFF;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
 }
 

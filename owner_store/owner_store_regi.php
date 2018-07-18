@@ -119,7 +119,7 @@ if (!$store_logo_error && !$business_upfile_error)
   
   if($flag !=="OK"){
       $sql = "create table store_regi(
-      no int(5) not null AUTO_INCREMENT,
+      no int not null AUTO_INCREMENT,
       owner_id varchar(10) not null,
       owner_name varchar(10) not null,
       owner_store_name varchar(50) not null,
@@ -137,15 +137,16 @@ if (!$store_logo_error && !$business_upfile_error)
       regi_date varchar(20) not null,
       regi_ok varchar(2) default 'N',
       menu_ok varchar(2) default 'N',
-      primary key(owner_num)
+      primary key(no)
     )";
     if(mysqli_query($con, $sql)){
       echo "<script>
         alert('store_regi 테이블이 생성되었습니다!');
       </script>";
+      
     }else{
       echo "<script>
-        alert('books 테이블 생성실패');
+        alert('store_regi 테이블 생성실패');
       </script>";
     }
   }  

@@ -1,7 +1,59 @@
 <?php 
     session_start();
     
+    include "../common_lib/common.php";
+    
     $owner_num = $_POST[owner_num];
+    
+    $sql = "select * from store_regi where no = '$owner_num'";
+    
+    $result = mysqli_query($con, $sql);
+    
+    $record_num = mysqli_num_rows($result);
+    
+    $row = mysqli_fetch_array($result);
+    
+    $store_delivery_area_str=$row[store_delivery_area];
+    $store_delivery_area_array=explode("/", $store_delivery_area_str);
+    $store_name = $row[store_name];
+    $business_license = $row[business_license];
+    $store_delivery_time = $row[store_delivery_time];
+    
+    $sql2 = "select distinct category_name from menu where registration_number = '$business_license' order by category_name";
+    $category_num_result = mysqli_query($con, $sql2);
+    
+    $owner_num = $row['no'];
+    $owner_id = $row['owner_id'];
+    $owner_name = $row['owner_name'];
+    $owner_store_name = $row['owner_store_name'];
+    $owner_address = $row['owner_address'];
+    $business_license = $row['business_license'];
+    $business_license_img = $row['business_license_img'];
+    $store_name = $row['store_name'];
+    $store_type = $row['store_type'];
+    
+    $store_logo_img=$row['store_logo_img'];
+    
+    $store_delivery_time = $row['store_delivery_time'];
+    $store_delivery=explode("~", $store_delivery_time);
+    $store_delivery_time_start=$store_delivery[0];
+    $store_delivery_time_end=$store_delivery[1];
+    
+    $store_day_off = $row['store_day_off'];
+    $store_origin = $row['store_origin'];
+    
+    $store_phone = $row['store_phone'];
+    $store_hp=explode("-", $store_phone);
+    $hp1=$store_hp[0];
+    $hp2=$store_hp[1];
+    $hp3=$store_hp[2];
+    
+    $store_delivery_area = $row['store_delivery_area'];
+    $regi_date = $row['regi_date'];
+    $regi_ok = $row['regi_ok'];
+    $menu_ok = $row['menu_ok'];
+    
+    
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +62,7 @@
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
     <link rel="stylesheet" href="../common_css/index_style.css?v=4">
-    <link rel="stylesheet" href="css/store_view_style.css?v=3">
+    <link rel="stylesheet" href="css/store_view_style.css?v=4">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript"> 
     var BASE = 0; // 스크롤 시작 위치    
@@ -44,6 +96,79 @@
         RefreshM(); 
 	}
  </script>
+ <style>
+	body{
+		overflow: scroll;
+	}
+	
+	div{
+		border: 1px solid black;
+		margin-top: 10px;
+	}
+	
+	.category_area{
+	width: 82%;
+	   margin: 0 0 0 0;
+	   padding: 0;
+	}
+	
+	.img_area{
+	   float: right;
+	   display:inline-block;
+	   margin: 10px;
+	   width: 80px;
+	   height: 80px;
+	}
+	
+	.img_area img{
+	   width: 80px;
+	   height: 80px;
+	}
+	
+	
+	.mn_info_input{
+	   height: 100px;
+	   float: left;
+	   display: inline-block;
+	} 
+	
+	.menu_info{
+		width: 80%;
+	    height:100px;
+		margin-left: 20px;
+		border-radius: 10px;
+		background-color: #F2E1B9;
+	}
+	
+	
+	.category_section{
+	   width: 75%;
+	   height: 50px;
+	   border-radius: 10px;
+	   background-color: #F36A4C; 
+	   
+	}
+	
+	.category_h1{
+	   display: inline-block;
+	   margin-left:20px;
+	}
+	
+	.mn_name, .mn_price, .menu_name, .menu_price, .menu_insert_btn, .insert_input {
+	   width: 300px;
+	   height: 20px;
+	   border-radius: 5px;
+	   margin: 5px 5px;
+	}
+	
+	.mn_comp, .menu_comp{
+	   width: 300px;
+	   height: 20px;
+	   border-radius: 5px;
+	   margin: 5px 5px;
+	}
+	</style>
+	
 </head>
 <body onload="InitializeM();">
 	<header>
@@ -62,10 +187,10 @@
 		<div class="store_data" style="border:1px solid green">		
     		<div class="store_outline" style="border:1px solid green">
     		<table>
-    			<tr><td colspan="2" id=s1><?php ?>가게이름
+    			<tr><td colspan="2" id=s1><?= $store_name ?>
     			<tr><td id=s2>별점
-    			<tr><td id=s3><?php ?>배달가능지역
-    			<tr><td id=s4><?php ?>배달 시간
+    			<tr><td id=s3>배달가능지역 : <?= $store_delivery_area ?>
+    			<tr><td id=s4>배달 시간  : <?= $store_delivery_time?>
     		</table>
     		</div><!-- end of store_data -->
     		
@@ -91,10 +216,59 @@
                      
                     <!-- THE PANELS -->
                     <article id="panels" style="border:1px solid green">
-                      <div class="container">
-                        <section id="panel-1">
+                      <div class="container" >
+                        <section id="panel-1" >
                           <main>
-                            <p>Content1</p>
+                            	<?php 
+                              	for(;$category_row = mysqli_fetch_array($category_num_result);){
+                              	    
+                              	    $category=$category_row[category_name];
+                              	   
+                              	  
+
+                              ?>
+                              	     <div class='category_area'>
+                        				 <div class='category_section'>
+                        					<h1 class='category_h1'><?= $category ?></h1>
+                        				</div> 
+  
+                                   <?php 
+                                   $sql = "select * from menu where registration_number = '$business_license' and category_name = '$category' order by category_name";
+                                   $result  = mysqli_query($con, $sql);
+                                   for(;$row = mysqli_fetch_array($result);){
+                                       
+                                       $category_name = $row[category_name];
+                                       $menu_name = $row[menu_name];
+                                       $menu_comp = $row[menu_comp];
+                                       $menu_price = $row[menu_price];
+                                       $menu_img = $row[menu_img];
+                                       $dir_menu_img = "../owner_store_info/menu_img_data/".$menu_img;
+                                   ?>
+                                    <div class='menu_info'>
+                        			<div class='mn_info_input'>
+                            			    
+                            				<input class='mn_name' name='menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
+                            			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
+                            			    <input class='mn_price' name='menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
+                        			    </div>
+                        			    	<div class='img_area'>
+                        			    		 <img class='sel_img' src='<?= $dir_menu_img?>'/>
+                        			   	 	</div>
+                        	   		</div>	
+                                   			
+                                   
+                                   
+                                   <?php     
+                                       
+                                   }
+                                  	    
+                                   ?>
+                              	            
+                        	</div>    
+                              	    <?php
+							
+                         }
+                              	    ?> 
                           </main>
                         </section>
                         <section id="panel-2">

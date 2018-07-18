@@ -12,7 +12,7 @@
     
     $result = mysqli_query($con, $sql);
     
-    
+    $num_record = mysqli_num_rows($result);
     
 ?>
 
@@ -45,7 +45,7 @@
 	</nav>
 
 	<div class="store_top">
-		<div id="store_head">총<?php ?>  <?php ?>개의 업체가 등록되어있습니다!</div>
+		<div id="store_head">총<?= $num_record?> 개의 업체가 등록되어있습니다!</div>
 		
 		
 		<div id="store_head_list">

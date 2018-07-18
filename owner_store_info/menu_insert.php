@@ -99,7 +99,7 @@
     echo "
 	   <script>
         alert('메뉴가 등록 되었습니다.');
-	    history.go(-1);
+	    location.href='./menu_manage_form.php';
 	   </script>
 	";
     
