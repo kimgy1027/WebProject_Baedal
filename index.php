@@ -678,7 +678,7 @@
     	<tr class="tr1">
     		<td class="td1"><font>* </font>회원종류</td>
     		<td><input type="radio" id="user" class="ok" name="user" value="user" checked="checked">이용자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    		 <input type="radio" class="ok" name="user" id="owner" value="admin">점주</td>
+    		 <input type="radio" class="ok" name="user" id="owner" value="owner">점주</td>
     	 	<td>
     	</tr>
     	<tr class="tr2">

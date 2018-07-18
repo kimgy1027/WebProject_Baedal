@@ -236,7 +236,7 @@ d1:after{
  
 .form input{	   /* 아이디패스워드 쓰는 텍스트창의 내부 */
   /* font-family: "Roboto", sans-serif; */
-  font-family: 'NANUMSQUARER';
+  
   outline: 0;
   background: #f2f2f2;
   width: 100%;
