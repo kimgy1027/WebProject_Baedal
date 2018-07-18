@@ -148,7 +148,7 @@
 	<?php 
 	while( $row = mysqli_fetch_array($result)){
 	    
-	    $owner_num = $row['owner_num'];
+	    $owner_num = $row['no'];
 	    $owner_id = $row['owner_id'];
 	    $owner_name = $row['owner_name'];
 	    $owner_store_name = $row['owner_store_name'];
