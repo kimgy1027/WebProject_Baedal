@@ -282,7 +282,7 @@
 		<div class="search" >
 			<p id="p1" ><br><p id="p2" style="font-weight: normal;">우리동네를 입력해보세요!
            <form>
-            <input id="asearch" type="text" placeholder="동 이름 검색" onkeyup="search_func()">
+            <input id="asearch" type="text" placeholder="동 이름 검색" onkeyup="search_func()" autocomplete="off">
                 <div id="src_rst" >
         			<div id="s_r_l" style = ></div>
         		</div>

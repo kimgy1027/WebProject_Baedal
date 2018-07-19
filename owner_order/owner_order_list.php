@@ -42,7 +42,7 @@
 </head>
 <body>
 	<header>
-		<?php include "../common_lib/top_login1.php"; ?>
+		<?php include "../common_lib/top_login2.php"; ?>
 	</header>
 	
 	<div class="logo">

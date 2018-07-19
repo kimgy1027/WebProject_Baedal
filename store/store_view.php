@@ -92,10 +92,65 @@
     function InitializeM(){    
         document.getElementById('cart_table').style.left = LEFT + "px";                              
         document.getElementById('cart_table').style.top = 
-                                                 document.body.scrollTop + BASE + "px";     
+        document.body.scrollTop + BASE + "px";     
         RefreshM(); 
 	}
+    
+    function add_cart(elem){
+    	var mn_name = $(elem).find(".mn_name").val();
+   	var mn_price = $(elem).find(".mn_price").val();
+    	var quantity = 1;
+    	
+    	
+    	$(".cart").append("<table class='cart_menu'>"+
+				"<tr><td colspan='2'><span class='name_mn'>"+mn_name+"</span><input name='menu_name' type='hidden' value ='"+mn_name+"'>"+
+				"<tr><td><span class='price_mn'>"+mn_price+"</span><input name='menu_price' type='hidden' value ='"+mn_price+"'>"+
+				"<td id='c2_3_2'>수량 : <button type='button' onclick='control(this,0)'><</button> <span class='quantity_mn'>"+ quantity +"</span>"+
+				"<input name='count' type='hidden' value='"+quantity+"'>  <button type='button' onclick='control(this,1)'>></button>"+
+				"</table>");
+    }
+    
+     function control(elem,updown){
+    	var price = $(elem).closest(".cart_menu").find("input[name=menu_price]").val();
+    	var count = $(elem).closest(".cart_menu").find("input[name=count]").val();
+    	var rs_val;
+    	price = Number(price);
+
+    	
+
+    	
+    	if(updown){
+
+    		count++;
+    		if(count < 1){
+        		return;
+        	}
+    		rs_val = price*count;
+    		 $(elem).closest(".cart_menu").find("input[name=count]").val(count);
+    		$(elem).closest(".cart_menu").find(".quantity_mn").text(count);
+    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val);
+    	}else{
+
+    		count--;
+    		if(count < 1){
+        		return;
+        	}
+    		rs_val = price*count;
+    		 $(elem).closest(".cart_menu").find("input[name=count]").val(count);
+    		$(elem).closest(".cart_menu").find(".quantity_mn").text(count);
+    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val); 
+    	}
+    	
+    
+    	
+    	
+    	
+    } 
+    
+    
  </script>
+ 
+ 
  <style>
 	body{
 		overflow: scroll;
@@ -183,6 +238,7 @@
 		<?php include "../common_lib/menu1_2.php"; ?>
 	</nav>
 	
+	
 	<div class="store_view" style="border:1px solid green">  
 		<div class="store_data" style="border:1px solid green">		
     		<div class="store_outline" style="border:1px solid green">
@@ -227,7 +283,7 @@
                               	  
 
                               ?>
-                              	     <div class='category_area'>
+                              	     <div class='category_area' >
                         				 <div class='category_section'>
                         					<h1 class='category_h1'><?= $category ?></h1>
                         				</div> 
@@ -244,9 +300,9 @@
                                        $menu_img = $row[menu_img];
                                        $dir_menu_img = "../owner_store_info/menu_img_data/".$menu_img;
                                    ?>
-                                    <div class='menu_info'>
+                                    <div class='menu_info' onclick="add_cart(this)">
                         			<div class='mn_info_input'>
-                            			    
+                            			    <input class='ctgr_name' name='category_name[]' type='hidden' value='<?= $category_name ?>' readonly><br>
                             				<input class='mn_name' name='menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
                             			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
                             			    <input class='mn_price' name='menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
@@ -294,10 +350,10 @@
 				<tr><td id=c1>장바구니<div></div><img onclick="delCart()" src="../common_img/waste-bin.png">
 				<tr><td class=cart>
 				<?php ?> <!--이벤트 결과에 따라 테이블 생성 -->
-				<table><tr><td colspan="2" id=c2_1>상호명
+				<!--  <table><tr><td colspan="2" id=c2_1>상호명
 				<tr><td colspan="2" >메뉴정보
 				<tr><td>가격<td id=c2_3_2>수량조절버튼
-				</table>
+				</table> -->
 				
 				<tr><td id=c3>최소주문금액 <?php ?>원 이상
 				<tr><td id=c4>합계 <?php ?>원

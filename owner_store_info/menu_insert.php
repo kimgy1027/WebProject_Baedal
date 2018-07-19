@@ -99,7 +99,7 @@
     echo "
 	   <script>
         alert('메뉴가 등록 되었습니다.');
-	    location.href='./menu_manage_form.php';
+	    location.href='../owner_order_list/owner_order_list.php';
 	   </script>
 	";
     
