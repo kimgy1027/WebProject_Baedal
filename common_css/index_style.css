@@ -219,7 +219,7 @@ d1:after{
   position: absolute;
   display: none;
   top: 200px; 
-  width:400px;
+  width:410px;
   left: 400px;
   right:400px;
   margin: 0 auto 0 auto;
@@ -235,14 +235,11 @@ d1:after{
 
  
 .form input{	   /* 아이디패스워드 쓰는 텍스트창의 내부 */
-  /* font-family: "Roboto", sans-serif; */
-  
-  outline: 0;
+ outline: 0;
   background: #f2f2f2;
-  width: 100%;
-  
+  width: 100%;  
   border: 0;
-  margin: 0 0 15px;
+  margin: 0 0 10px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
@@ -252,17 +249,16 @@ d1:after{
   display: block;
   font-family: 'NANUMSQUARER';
   font-weight:bold;
-  text-transform: uppercase;
   background: #2ac1bc;
   width: 100%;
   border: 0;
   padding: 15px;
   color: #FFFFFF;
   font-size: 15px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
   cursor: pointer;
   text-decoration: none;
+  margin :auto;
+  margin-bottom: 7px;
 }
 
 .form .message {
@@ -294,7 +290,7 @@ d1:after{
   display: none; 
   width: 900px;
   margin-left: -450px;
-  margin-top: -480px;
+  margin-top: -450px;
   top: 50%;
   left: 50%;
   z-index: 30;

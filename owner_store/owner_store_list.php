@@ -12,7 +12,7 @@
     
     $result = mysqli_query($con, $sql);
     
-    
+    $num_record = mysqli_num_rows($result);
     
 ?>
 
@@ -45,7 +45,7 @@
 	</nav>
 
 	<div class="store_top">
-		<div id="store_head">총<?php ?>  <?php ?>개의 업체가 등록되어있습니다!</div>
+		<div id="store_head">총<?= $num_record?> 개의 업체가 등록되어있습니다!</div>
 		
 		
 		<div id="store_head_list">
@@ -107,8 +107,8 @@
 		    $menu_ok = $row['menu_ok'];
 		?>
 		
-		<form action="../owner_store_info/menu_manage_form.php" method="post" name="store_form">
-		<input name="business_license" type="hidden" value="<?= $business_license ?>">
+		<form action="../owner_store_info/manage_form.php" method="post" name="store_form">
+		<input name="owner_no" type="hidden" value="<?= $no ?>">
 		<div class="store_list_info1">
 			<!-- DB에서 불러온 가게수에 따라서 div 생성하면댄다 >내부 내용도 써야함 -->
 		

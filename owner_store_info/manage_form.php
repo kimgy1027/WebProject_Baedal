@@ -7,19 +7,19 @@
         $id = $_SESSION[id];
     }
     
-    if(isset($_POST[business_license])){
+    if(isset($_POST[owner_no])){
         
-        $business_license =$_POST[business_license];
+        $owner_no =$_POST[owner_no];
     }
     
     
-    $sql = "select * from store_regi where business_license='$business_license'" ;
+    $sql = "select * from store_regi where no='$owner_no'" ;
    $result  = mysqli_query($con, $sql);
    
   $row  = mysqli_fetch_array($result);
   
   $store_delivery_area_str=$row[store_delivery_area];
-  $store_delivery_area_araay=explode("/", $store_delivery_area_str);
+  $store_delivery_area_array=explode("/", $store_delivery_area_str);
   $store_name = $row[store_name];
   $business_license = $row[business_license];
   $store_delivery_time = $row[store_delivery_time];
@@ -39,7 +39,7 @@
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
     <link rel="stylesheet" href="../common_css/common.css?v=4">
-    <link rel="stylesheet" href="./css/store_view_style.css?v=5">
+    <link rel="stylesheet" href="./css/manage_form_style.css?v=5">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript"> 
     var sel_files = []; 

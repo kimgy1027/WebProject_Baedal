@@ -40,7 +40,7 @@
       $sql = "show tables from web_baedal_DB";
       $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
       while($row=mysqli_fetch_row($result)){
-        if($row[0]==="order"){
+        if($row[0]==="order_list"){
           $flag = "OK";
           break;
         }
@@ -91,7 +91,7 @@
 	<meta charset="utf-8">
     <title>배달의신 - 결제하기</title>
     <link rel="stylesheet" href="../common_css/common.css?v=1">
-    <link rel="stylesheet" href="./css/order_form.css?v=7">
+    <link rel="stylesheet" href="./css/order_form.css?v=8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
 	function loadData(){
@@ -166,6 +166,8 @@
 			<table>
 			<tr class="tr1"><td class="td1">주문 메뉴<td class="td2">수량<td class="td3">결제금액<td class="td4">삭제
 			<tr class="tr2"><td class="td1"><input type="hidden" name=""><?php ?><td class="td2"><input type="text" size=1 class="num"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3">결제금액ㄱ<td class="td4"><img src="../common_img/cancel.png">
+			
+			<tr class="tr_total"><td class="td1">총&nbsp; &nbsp; 금 액<td  class="td2" colspan="4"><?php ?>원
 			</table>
 		</div><!-- end of order_info -->
 		<div class="pay_info">

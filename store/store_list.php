@@ -20,9 +20,11 @@
         $town = $_SESSION[town];
       
          if(isset($_GET[tob])){
-            $tob=$_GET[tob];
+       
+            $tob = $_GET[tob];
+           
+             $sql = "select * from store_regi where store_delivery_area like '%$town%' and store_type = '$tob'"; //수정 요망
             
-            $sql = "select * from store_regi where store_delivery_area like '%$town%' and store_type = '$tob'"; //수정 요망!
         }else{
             $sql = "select * from store_regi where store_delivery_area like '%$town%'";
             

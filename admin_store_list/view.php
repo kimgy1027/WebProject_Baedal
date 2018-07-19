@@ -284,8 +284,8 @@ $business_license=$_GET['business_license'];
      
                     include "../common_lib/common.php";
     	           
-    	            $sql="select * from store_regi where business_license=$business_license order by owner_num";
-    	            $sql2="select * from store_regi where business_license_img=$business_license_img order by owner_num";
+    	            $sql="select * from store_regi where business_license=$business_license order by no";
+    	            $sql2="select * from store_regi where business_license_img=$business_license_img order by no";
     	            $result=mysqli_query($con, $sql);
     	            $result2=mysqli_query($con, $sql);
     	            
