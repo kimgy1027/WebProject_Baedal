@@ -243,11 +243,11 @@
 	
 	/////////////////////////////////////////////////////검색기능///////////////////
     	function search_func(){
-			var town = $("#asearch").val();
+			var search = $("#asearch").val();
     		$.ajax({
 				type : "post",
 				url : "./search/search_result.php",
-				data : "town="+town,
+				data : "search="+search,
 				success : function(data){
 					$("#src_rst").show();
 					$("#s_r_l").html(data);

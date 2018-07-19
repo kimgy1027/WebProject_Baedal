@@ -39,7 +39,7 @@ $nick = $_SESSION['nick'];
 		window.open("./modify_info.php?","닉네임변경창",
 		          "left=200,top=200,width=500,height=300,scrollbars=no,resizable=yes");  */
 		
-		 window.open('./modify_info.php?mode='+mode+'','닉네임 변경창', 'width='+popW+', height='+popH +',top='+posT+',left='+posL+', location=no'); 
+		 window.open('./modify_nick.php?mode='+mode+'','닉네임 변경창', 'width='+popW+', height='+popH +',top='+posT+',left='+posL+', location=no'); 
     }
     
   //팝업창 가운데 띄우기
@@ -52,7 +52,7 @@ $nick = $_SESSION['nick'];
          var posL=(screenW-popW)/2;
          var posT=(screenH-popH)/2;
          
-         window.open('./modify_info.php?mode='+mode+'','주문 상세보기', 'width='+popW+', height='+popH +', top='+posT+', left='+posL+', location=no');
+         window.open('./modify_pwd.php?mode='+mode+'','비번변경창', 'width='+popW+', height='+popH +', top='+posT+', left='+posL+', location=no');
       }
 		
 	
@@ -62,7 +62,7 @@ $nick = $_SESSION['nick'];
 </head>
 <body>
 	<header>
-		<?php include "../common_lib/top_login1.php"; ?>
+		<?php include "../common_lib/top_login2.php"; ?>
 	</header>
 	
 	<div class="logo">
@@ -79,12 +79,12 @@ $nick = $_SESSION['nick'];
    </div>
 	
    <div class="my">
-       	<form action="./modify_info.php" method="post">
+       	<form name="info_form" action="./modify_nick.php" method="post">
            	<div class="my_info">
             	<p>아이디 정보</p>
             	<table>
                 <tr><td class="td1">아이디<td class="td2"><input type="text" name="id" value="<?= $id ?>" disabled>
-                <tr><td class="td1">닉네임<td class="td2"><input type="text" name="nick" value="<?= $nick ?>"><button type="button" onclick="change_nick_check()">변 경</button>
+                <tr><td class="td1">닉네임<td class="td2"><input type="text" name="nick" value="<?= $nick ?>"  readonly><button type="button" onclick="change_nick_check()">변 경</button>
                 <tr><td class="td1">비밀번호<td class="td2"><input type="password" name="pass" value="<?= $pass ?>"><button type="button" onclick="popupFunc()">변 경</button>
                 <tr><td class="td1">이메일<td class="td2"><input type="text" name="email" value="<?= $email ?>" disabled>
                 </table>
