@@ -35,7 +35,7 @@
 <meta charset="UTF-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="./slide/css/slide.css?v=1"> 
-<link rel="stylesheet" href="./common_css/index_style.css?v=16">
+<link rel="stylesheet" href="./common_css/index_style.css?v=20">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>  
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -108,18 +108,40 @@
         }
 	
     	function check_id(){
-    			window.open("./membership/check_id.php?id="+document.join_form.id.value, "IDcheck", "left=200, top=200, width=500, height=320, scrollbars=no, resizable=no");
+    		var screenW=screen.availWidth; //스크린 가로사이즈
+            var screenH=screen.availHeight; //스크린 세로사이즈
+            var popW=500; //띄울 창의 가로사이즈
+            var popH=340; //띄울 창의 세로사이즈
+            var posL=(screenW-popW)/2;
+            var posT=(screenH-popH)/2;
+  
+    			window.open("./membership/check_id.php?id="+document.join_form.id.value, "IDcheck", 'left='+posL+', top='+posT+', width='+popW+', height='+popH+', scrollbars=no, resizable=no');
+    	        
     	}
-	 
+    	
     	function check_nick(){
+    		var screenW=screen.availWidth; //스크린 가로사이즈
+            var screenH=screen.availHeight; //스크린 세로사이즈
+            var popW=520; //띄울 창의 가로사이즈
+            var popH=330; //띄울 창의 세로사이즈
+            var posL=(screenW-popW)/2;
+            var posT=(screenH-popH)/2;
+            
     	     window.open("./membership/check_nick.php?nick=" + document.join_form.nick.value,
     	         "NICKcheck",
-    	          "left=200,top=200,width=500,height=300,scrollbars=no,resizable=yes");
+    	         'left='+posL+', top='+posT+', width='+popW+', height='+popH+', scrollbars=no, resizable=no');
     	}
 	 
     	function check_email(){	//수정
+    		var screenW=screen.availWidth; //스크린 가로사이즈
+            var screenH=screen.availHeight; //스크린 세로사이즈
+            var popW=500; //띄울 창의 가로사이즈
+            var popH=300; //띄울 창의 세로사이즈
+            var posL=(screenW-popW)/2;
+            var posT=(screenH-popH)/2;
+            
 			window.open("./membership/check_email.php?email=" + document.join_form.email.value,
-    			"IDEmail", "left=200, top=200, width=500, height=350, scrollbars=no, resizable=yes");
+    			"IDEmail", 'left='+posL+', top='+posT+', width='+popW+', height='+popH+', scrollbars=no, resizable=no');
     	}
 	 
 	 
@@ -208,16 +230,24 @@
 	//////////////////////////////////////////로그인 창//////////////////////////////////////////////
    
 		function find_pw(){
-			location.href="./login/pw_find.php";
+			var screenW=screen.availWidth; //스크린 가로사이즈
+            var screenH=screen.availHeight; //스크린 세로사이즈
+            var popW=730; //띄울 창의 가로사이즈
+            var popH=350; //띄울 창의 세로사이즈
+            var posL=(screenW-popW)/2;
+            var posT=(screenH-popH)/2;
+            
+    	     window.open("./login/pw_find.php",	         "findPW",
+    	         'left='+posL+', top='+posT+', width='+popW+', height='+popH+', scrollbars=no, resizable=no');
 		}
 	
 	/////////////////////////////////////////////////////검색기능///////////////////
     	function search_func(){
-			var town = $("#asearch").val();
+			var search = $("#asearch").val();
     		$.ajax({
 				type : "post",
 				url : "./search/search_result.php",
-				data : "town="+town,
+				data : "search="+search,
 				success : function(data){
 					$("#src_rst").show();
 					$("#s_r_l").html(data);
@@ -667,7 +697,6 @@
 	</div>
 </div>
 
-
 <div id="sign_up">
 
 <img src="./common_img/logo.JPG" width="150px">
@@ -679,7 +708,7 @@
     	<tr class="tr1">
     		<td class="td1"><font>* </font>회원종류</td>
     		<td><input type="radio" id="user" class="ok" name="user" value="user" checked="checked">이용자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    		 <input type="radio" class="ok" name="user" id="owner" value="owner">점주</td>
+    		 <input type="radio" class="ok" name="user" id="owner" value="admin">점주</td>
     	 	<td>
     	</tr>
     	<tr class="tr2">
