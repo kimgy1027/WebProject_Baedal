@@ -7,13 +7,13 @@
         $id = $_SESSION[id];
     }
     
-    if(isset($_POST[business_license])){
+    if(isset($_POST[owner_no])){
         
-        $business_license =$_POST[business_license];
+        $owner_no =$_POST[owner_no];
     }
     
     
-    $sql = "select * from store_regi where business_license='$business_license'" ;
+    $sql = "select * from store_regi where no='$owner_no'" ;
    $result  = mysqli_query($con, $sql);
    
   $row  = mysqli_fetch_array($result);
