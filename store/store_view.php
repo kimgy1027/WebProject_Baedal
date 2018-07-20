@@ -98,54 +98,85 @@
     
     function add_cart(elem){
     	var mn_name = $(elem).find(".mn_name").val();
-   	var mn_price = $(elem).find(".mn_price").val();
+   		var mn_price = $(elem).find(".mn_price").val();
     	var quantity = 1;
     	
     	
     	$(".cart").append("<table class='cart_menu'>"+
-				"<tr><td colspan='2'><span class='name_mn'>"+mn_name+"</span><input name='menu_name' type='hidden' value ='"+mn_name+"'>"+
-				"<tr><td><span class='price_mn'>"+mn_price+"</span><input name='menu_price' type='hidden' value ='"+mn_price+"'>"+
+				"<tr><td colspan='2'><span class='name_mn'>"+mn_name+"</span><input name='menu_name[]' type='hidden' value ='"+mn_name+"'>"+
+				"<button type='button' onclick='del_cart_table(this)' style='float:right;'>X</button>"+
+				"<tr><td><span class='price_mn'>"+mn_price+" </span><input class='price' name='menu_price[]' type='hidden' value ='"+mn_price+"'>"+
 				"<td id='c2_3_2'>수량 : <button type='button' onclick='control(this,0)'><</button> <span class='quantity_mn'>"+ quantity +"</span>"+
-				"<input name='count' type='hidden' value='"+quantity+"'>  <button type='button' onclick='control(this,1)'>></button>"+
+				"<input name='count[]' class='count' type='hidden' value='"+quantity+"'>  <button type='button' onclick='control(this,1)'>></button>"+
 				"</table>");
+   
+    	 cal_sum(); 
     }
     
      function control(elem,updown){
-    	var price = $(elem).closest(".cart_menu").find("input[name=menu_price]").val();
-    	var count = $(elem).closest(".cart_menu").find("input[name=count]").val();
+    	var price = $(elem).closest(".cart_menu").find(".price").val();
+    	var count = $(elem).closest(".cart_menu").find(".count").val();
     	var rs_val;
-    	price = Number(price);
+    	price = parseInt(price);
 
     	
 
     	
     	if(updown){
-
     		count++;
-    		if(count < 1){
-        		return;
-        	}
     		rs_val = price*count;
-    		 $(elem).closest(".cart_menu").find("input[name=count]").val(count);
+    		 $(elem).closest(".cart_menu").find(".count").val(count);
     		$(elem).closest(".cart_menu").find(".quantity_mn").text(count);
-    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val);
+    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val+" ");
     	}else{
-
     		count--;
+    		
     		if(count < 1){
         		return;
         	}
     		rs_val = price*count;
-    		 $(elem).closest(".cart_menu").find("input[name=count]").val(count);
+    		
+    		 $(elem).closest(".cart_menu").find(".count").val(count);
     		$(elem).closest(".cart_menu").find(".quantity_mn").text(count);
-    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val); 
+    		$(elem).closest(".cart_menu").find(".price_mn").text(rs_val+" "); 
     	}
     	
     
     	
     	
-    	
+    	 cal_sum(); 
     } 
+     
+     
+     function del_cart_table(elem){
+    	 $(elem).closest(".cart_menu").remove();
+    	 cal_sum();
+     }
+     
+     
+     
+      function cal_sum(){
+    	
+    	 var price_text = $("form[name=cart_form]").find(".price_mn").text();
+    	 var sum =0;
+    	 
+    	 
+         var price_array= price_text.split(' ');
+    	  for(var i in price_array){
+    		  
+    		  if(price_array[i]){
+    			  var con_num = price_array[i];
+    	    		 
+    	          sum = sum + parseInt(con_num);
+    		  }
+    		 
+    		 
+    	 } 
+    	 
+    	 $("#sum").text(sum);
+     } 
+     
+     
     
     
  </script>
@@ -345,6 +376,8 @@
 		</div><!-- end of store_data -->
 		
 		<div class="cart_view" >
+		<form name="cart_form" action="../order/order_form.php">
+		<input name="owner_num" type='hidden' value='<?=$owner_num?>'>
 		<div style="position:relative; width:100%; height:1200px; border:1px solid black"> <!--div 기준으로 table의 위치가 선정된다  -->
 			<table id=cart_table>
 				<tr><td id=c1>장바구니<div></div><img onclick="delCart()" src="../common_img/waste-bin.png">
@@ -355,11 +388,13 @@
 				<tr><td>가격<td id=c2_3_2>수량조절버튼
 				</table> -->
 				
-				<tr><td id=c3>최소주문금액 <?php ?>원 이상
-				<tr><td id=c4>합계 <?php ?>원
+				<tr><td id=c3>최소주문금액 <?php ?> 원 이상
+				<tr><td id=c4>합계 <span id="sum"></span>원
 				<tr><td id=c5><button>주 문 하 기</button>
 			</table>
 		</div>
+		
+		</form>
 		</div><!-- end of cart_view -->		
 		
 		

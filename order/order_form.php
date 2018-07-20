@@ -2,6 +2,19 @@
        session_start();
     	$id = $_SESSTION['id'];
     
+    	
+       $town = $_SESSION[town];
+       
+       $owner_num = $_POST[owner_num];
+       $menu_name = $_POST[menu_name];
+       $menu_price = $_POST[menu_price];
+       $menu_count = $_POST[menu_count];
+       
+       $menu_record = count($menu_name);
+       
+       var_dump($menu_record);
+       exit;
+       
        include "../common_lib/common.php";
          
        $flag = "NO";
@@ -156,7 +169,7 @@
 		<div class="address_info">
 			<p>01 배달 정보
 			<table>
-			<tr><td class="td1">주소<td><input type="text" name="address" placeholder="주문받을 주소를 입력해주세요.">
+			<tr><td class="td1">주소<td><input type="text" name="address" placeholder="주문받을 주소를 입력해주세요." value="<?=$town?>">
 			<tr><td class="td1">연락처<td><input type="text" name="phone" placeholder="전화번호를 입력해주세요.('-'제외)">
 			<tr><td class="td1">요청사항<td><input type="text" name="request" placeholder="요청사항을 입력해주세요.(50자 이내)">
 			</table>
@@ -165,7 +178,14 @@
 			<p>02 주문 정보
 			<table>
 			<tr class="tr1"><td class="td1">주문 메뉴<td class="td2">수량<td class="td3">결제금액<td class="td4">삭제
-			<tr class="tr2"><td class="td1"><input type="hidden" name=""><?php ?><td class="td2"><input type="text" size=1 class="num"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3">결제금액ㄱ<td class="td4"><img src="../common_img/cancel.png">
+			<?php 
+    			for($i = 0 ; $i < $menu_record ; $i++){
+    	    ?>
+			<tr class="tr2"><td class="td1"><input type="hidden" name="mn_name[]" value="<?=$menu_name[$i]?>"><?=$menu_name[$i]?><td class="td2"><input type="text" size=1 class="num" value="<?=$menu_count[$i]?>"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3"><span><?=$menu_name[$i]?></span><td class="td4"><img src="../common_img/cancel.png">
+    			    
+    		<?php	
+    			}
+    	    ?>
 			
 			<tr class="tr_total"><td class="td1">총&nbsp; &nbsp; 금 액<td  class="td2" colspan="4"><?php ?>원
 			</table>
