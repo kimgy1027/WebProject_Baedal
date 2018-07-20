@@ -1,6 +1,6 @@
  <?php
        session_start();
-    	$id = $_SESSTION['id'];
+       $id = $_SESSTION['id'];
     
     	
        $town = $_SESSION[town];
@@ -8,12 +8,9 @@
        $owner_num = $_POST[owner_num];
        $menu_name = $_POST[menu_name];
        $menu_price = $_POST[menu_price];
-       $menu_count = $_POST[menu_count];
+       $menu_count = $_POST[count];
        
        $menu_record = count($menu_name);
-       
-       var_dump($menu_record);
-       exit;
        
        include "../common_lib/common.php";
          
@@ -107,16 +104,27 @@
     <link rel="stylesheet" href="./css/order_form.css?v=8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
-	function loadData(){
+	
+
+	function del_menu(){
+		var ok = confirm("해당메뉴를 정말로 삭제하시겠습니까?");
+		if(!ok){return;}
+		var n = $(this).index(this);
+		$(".tr2:eq("+n+")").remove();
+	}
+	
+	
+    
+     /* function loadData(){
 		if(isset($address)){
 			document.order_form.address.value=$address;
 		}
 		if(isset($phone)){
 			document.order_form.phone.value=$phone;
 		}
-	}
+	} */
 
-    	$(function(){ 
+    	 $(function(){ 
     	  $('.bt_up').click(function(){ 
     	    var n = $('.bt_up').index(this);
     	    var num = $(".num:eq("+n+")").val();
@@ -124,15 +132,17 @@
     	  });
     	  $('.bt_down').click(function(){ 
     	    var n = $('.bt_down').index(this);
-    	    if(n==1){
+    	    var num = $(".num:eq("+n+")").val();
+    	    if(num==1){
     	    	return;
     	    }
-    	    var num = $(".num:eq("+n+")").val();    	    
-    	    num = $(".num:eq("+n+")").val(num*1-1); 
+    	   
+    	    
+    	    
     	  });
     	}) 
     	  
-    	function orderOk()
+    	function orderOk(){
     		if(!document.order_form.address.value){
              	 alert("배달 받으실 주소를 입력해주세요!");
               	  document.order_form.address.focus();
@@ -144,11 +154,15 @@
               	return ;
  		} 
 	document.order_form.submit();				   		
-    	}
+    	} 
+    	 
+    	
+    	
+    	
     </script>
     
 </head>
-<body onload="loadData()">
+<body>
 	<header>
 		<?php include "../common_lib/top_login1.php"; ?>
 	</header>
@@ -180,8 +194,10 @@
 			<tr class="tr1"><td class="td1">주문 메뉴<td class="td2">수량<td class="td3">결제금액<td class="td4">삭제
 			<?php 
     			for($i = 0 ; $i < $menu_record ; $i++){
+    			     
+    			    
     	    ?>
-			<tr class="tr2"><td class="td1"><input type="hidden" name="mn_name[]" value="<?=$menu_name[$i]?>"><?=$menu_name[$i]?><td class="td2"><input type="text" size=1 class="num" value="<?=$menu_count[$i]?>"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3"><span><?=$menu_name[$i]?></span><td class="td4"><img src="../common_img/cancel.png">
+			<tr class="tr2"><td class="td1"><input type="hidden" name="mn_name[]" value="<?=$menu_name[$i]?>"><?=$menu_name[$i]?><td class="td2"><input type="text" size=1 class="num" value="<?=$menu_count[$i]?>"> <img src="../common_img/add.png" class=bt_up> <img src="../common_img/minus.png" class=bt_down><td class="td3"><span><?=($menu_price[$i] * $menu_count[$i])?></span><td class="td4"><img class="del_menu_img" src="../common_img/cancel.png" onclick="del_menu()">
     			    
     		<?php	
     			}

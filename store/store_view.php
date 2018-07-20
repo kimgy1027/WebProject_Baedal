@@ -333,10 +333,10 @@
                                    ?>
                                     <div class='menu_info' onclick="add_cart(this)">
                         			<div class='mn_info_input'>
-                            			    <input class='ctgr_name' name='category_name[]' type='hidden' value='<?= $category_name ?>' readonly><br>
-                            				<input class='mn_name' name='menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
-                            			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
-                            			    <input class='mn_price' name='menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
+                            			    <input class='ctgr_name'  type='hidden' value='<?= $category_name ?>' readonly><br>
+                            				<input class='mn_name'  type='text' value='<?= $menu_name ?>' readonly><br>
+                            			    <textarea class='mn_comp'  readonly><?= $menu_comp ?></textarea><br>
+                            			    <input class='mn_price'  type='text' value='<?= $menu_price ?>' readonly><br>
                         			    </div>
                         			    	<div class='img_area'>
                         			    		 <img class='sel_img' src='<?= $dir_menu_img?>'/>
@@ -376,7 +376,7 @@
 		</div><!-- end of store_data -->
 		
 		<div class="cart_view" >
-		<form name="cart_form" action="../order/order_form.php">
+		<form name="cart_form" method="post" action="../order/order_form.php">
 		<input name="owner_num" type='hidden' value='<?=$owner_num?>'>
 		<div style="position:relative; width:100%; height:1200px; border:1px solid black"> <!--div 기준으로 table의 위치가 선정된다  -->
 			<table id=cart_table>
