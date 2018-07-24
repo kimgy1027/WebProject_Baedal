@@ -3,9 +3,11 @@
     
     include "../common_lib/common.php";
     
-    $owner_num = $_POST[owner_num];
+    $owner_no = $_POST[owner_num];
     
-    $sql = "select * from store_regi where no = '$owner_num'";
+    $sql = "select * from store_regi where no = '$owner_no'";
+    
+    
     
     $result = mysqli_query($con, $sql);
     
@@ -19,8 +21,7 @@
     $business_license = $row[business_license];
     $store_delivery_time = $row[store_delivery_time];
     
-    $sql2 = "select distinct category_name from menu where registration_number = '$business_license' order by category_name";
-    $category_num_result = mysqli_query($con, $sql2);
+   
     
     $owner_num = $row['no'];
     $owner_id = $row['owner_id'];
@@ -53,6 +54,9 @@
     $regi_ok = $row['regi_ok'];
     $menu_ok = $row['menu_ok'];
     
+    $sql2 = "select distinct category_name from menu where owner_no = '$owner_no' order by category_name";
+    $category_num_result = mysqli_query($con, $sql2);
+    
     
 ?>
 
@@ -62,7 +66,7 @@
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
     <link rel="stylesheet" href="../common_css/index_style.css?v=4">
-    <link rel="stylesheet" href="css/store_view_style.css?v=4">
+    <link rel="stylesheet" href="./css/store_view_style.css?v=5">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript"> 
     var BASE = 0; // 스크롤 시작 위치    
@@ -320,10 +324,10 @@
                         				</div> 
   
                                    <?php 
-                                   $sql = "select * from menu where registration_number = '$business_license' and category_name = '$category' order by category_name";
+                                   $sql = "select * from menu where owner_no = '$owner_no' and category_name = '$category' order by category_name";
                                    $result  = mysqli_query($con, $sql);
                                    for(;$row = mysqli_fetch_array($result);){
-                                       
+                                      
                                        $category_name = $row[category_name];
                                        $menu_name = $row[menu_name];
                                        $menu_comp = $row[menu_comp];
@@ -403,8 +407,8 @@
 	
 	
 
-	<footer>
-      <?php include "../common_lib/footer1.php"; ?>
-	</footer>
+	<!-- <footer>
+      <?php //include "../common_lib/footer1.php"; ?>
+	</footer> -->ㄴ
 </body>
 </html>

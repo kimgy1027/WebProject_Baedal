@@ -3,42 +3,25 @@ session_start();
 include "../common_lib/common.php";
 
 $id=$_SESSION['id'];
+$my_pass=$_POST['my_pass'];
+$pass=$_POST['pass'];
 
-if(isset($_POST['my_nick']) && isset($_POST['nick'])){
-    $my_nick = $_POST['my_nick'];
-    $nick = $_POST['nick'];
+if(isset($_POST['pass']) && isset($_POST['my_pass'])){
+    $my_pass = $_POST['my_pass'];
+    $pass = $_POST['pass'];
     
-    var_dump($my_nick.$nick);
-    
-    if($my_nick == $nick){
-        $now_nick = true;
-    }else{
-        $sql = "select * from membership where nick='$nick' and not id='$id'";
-        $result = mysqli_query($con, $sql);
-        $num_record = mysqli_num_rows($result);
-    }
-    
-  
-   
-    
-}else{
-    
-    $sql = "select * from membership where id='$id'" ;
-    
-    $result = mysqli_query($con, $sql);
-    
-    $row = mysqli_fetch_array($result);
-    
-    $my_nick = $row['nick'];
-    
-    $num_record = true;
+}
+
+if($db_pass == $pass){
+    $now_pass = true;
 }
 
 
+$sql="select * from membership where id='$id'";
+$result=mysqli_query($con, $sql);
+$row=mysqli_fetch_array($result);
+$db_pass=$row['pass'];
 
-
-
- 
 
 ?>
 
@@ -49,6 +32,7 @@ if(isset($_POST['my_nick']) && isset($_POST['nick'])){
 	<link href="../membership/css/join.css?v=2" rel=stylesheet>
 </head>
 
+
 <script type="text/javascript">
 
 function check_exp(elem, exp, msg){
@@ -58,67 +42,53 @@ function check_exp(elem, exp, msg){
 	}
 }
 function check_input(){
-	if(!document.join_form.user.value){
-		alert("회원종류를 선택해주세요");
-		return;
-	}
-	
-	// 아이디 검사
-	var exp_id= /^[0-9a-zA-Z]{6,12}$/;
-	if(check_exp(document.join_form.id, exp_id, "ID는 6~12자리 영문 또는 숫자만 입력해주세요!")){
-		document.join_form.id.focus();
-		document.join_form.id.select();
-		return ;
-	}
 	
 	
-	var exp_nick= /^[0-9a-zA-Z가-하]{2,10}$/;
-	if(!document.join_form.nick.value){
-		alert("닉네임을 입력 해주세요");
-		document.join_form.nick.focus();
-		return ;
-	}			
-	if(check_exp(document.join_form.nick, exp_nick, "닉네임 올바르게 입력해주세요")){
-		document.join_form.nick.focus();
-		document.join_form.nick.select();
-		return ;
-	}	
-	
-	 if(email_pass === "N"){
-			alert("이메일을 인증해주세요 !!");
-			return;
-		}
 	
  	// 암호 검사
-	var exp_pass= /^[0-9a-zA-Z~!@#$%^&*()]{10,16}$/;
-	if(!document.join_form.pass.value){
+	 var exp_pass= /^[0-9a-zA-Z~!@#$%^&*()]{8,20}$/;
+ if(!document.pass_modify_form.pass.value){
 		alert("암호를 입력해주세요");
-		document.join_form.pass.focus();
+		document.pass_modify_form.pass.focus();
 		return ;
-	}			
-	if(check_exp(document.join_form.pass, exp_pass, "암호는 6~12자리 영문 또는 숫자만 입력해주세요!")){
-		document.join_form.pass.focus();
-		document.join_form.pass.select();
-		return ;
-	}		
+	}	 	 
 	
-	// 암호 일치 확인
-	if(document.join_form.pass.value != document.join_form.passcheck.value){
-		alert("암호가 일치하지 않습니다. 다시 입력해주세요");
-		document.join_form.pass.focus();
-		document.join_form.pass.select();
+ 
+ 
+	if(check_exp(document.pass_modify_form.pass, exp_pass, "암호는 8~20자리 영문 또는 숫자만 입력해주세요!")){
+		document.pass_modify_form.pass.focus();
+		document.pass_modify_form.pass.select();
 		return ;
+	}	 	
+	
+	if(document.getElementById("pass").value != document.getElementById("db_pass").value){
+		alert("사용가능");
+	
+		
+
+	}else{
+		alert("현재 설정된 패스워드와 같습니다! 새로운 패스워드를 입력하시거나 취소하여주세요");
+		return;
+		/* location.href="./user_info.php"; */
 	}
 	
-
 	
 	
-	document.join_form.submit();
+	document.pass_modify_form.submit();
+	
+	// 암호 일치 확인
+	/* if(document.pass_check_form.pass.value != document.pass_check_form.passcheck.value){
+		alert("암호가 일치하지 않습니다. 다시 입력해주세요");
+		document.pass_check_form.pass.focus();
+		document.pass_check_form.pass.select();
+		return ;
+	} */
 }
 
 
-function pwd_use(pwd){
-	opener.info_form.nick.value = pwd;
+
+function pass_use(pass){
+	opener.info_form.pass.value = pass;
 	window.close();
 	
 	
@@ -140,10 +110,10 @@ function pwd_use(pwd){
 			(암호는 6~12자리 영문 또는 숫자만 입력해주세요!)
 		</div>
 		<br>
-		<form name=id_check_form method=post action="modify_nick.php">
+		<form name=pass_modify_form method=post action="modify_pwd.php">
 		<div align="center">
-			<input type="text" name="nick" id="nick" placeholder="패스워드를 입력하시오"/> <img id="search" src="./images/검색.jpg" height="30px" onclick="check_input()">
-			<input type="text" name="my_nick" id="db_nick" value="<?=$my_nick?>" readonly>
+			<input type="text" name="pass" id="pass" placeholder="패스워드를 입력하시오"/> <img id="search" src="./images/검색.jpg" height="30px" onclick="check_input()"><br>
+			<input type="hidden" name="db_pass" id="db_pass" value="<?=$db_pass?>" readonly>
 		</div>
 		</form>
 		<br>
@@ -152,26 +122,18 @@ function pwd_use(pwd){
 		<?php 
 		
 		
-		if($now_nick){
+		if($now_pass){
 		?>
 			<div id=text2 align=center>
 			<b>현재 설정된 패스워드와 같습니다! 새로운 패스워드를 입력하시거나 취소하여주세요</b><br><br>
 		</div>
 		<?php 
-		}else if($num_record){
-		    ?>
-		<div id=text2 align=center>
-			<b>입력하신 '<font color=red><?=$nick?></font>'는 <font color=red>사용할 수 없는</font> 패스워드입니다.<br>
-				새로운 패스워드로 하십시오.</b>
-		</div>
-		<?php 
-		
 		}else{
 		    ?>
 		<div id=text2 align=center>
-			<b>입력하신 '<font color=red><?=$nick?></font>'는 사용하실 수 있습니다.<br>
+			<b> '<font color=red><?=$pass?></font>'는 사용하실 수 있습니다.<br>
 				이 패스워드를 사용하시겠습니까?</b><br><br>
-			<img src="../image/use.gif" onclick="nick_use('<?=$nick?>')">
+			<button type="button" style="font-weight:bold; background:#2ac1bc; color:#FFFFFF; width:70px; height: 30px;" onclick="pass_use('<?=$pass?>')">확 인</button>
 		</div>
 		<?php
 		}

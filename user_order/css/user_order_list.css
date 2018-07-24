@@ -45,11 +45,10 @@
 	width: 700px;
 }
 /*상태 스타일*/
-.order_list .tr1 #state{
-	font-size: 15pt;
-	background-color: gray;
-	color: white;
-	font-weight: normal;
+
+.order_list .tr1 #look{
+	height: 30px;
+	cursor: pointer;
 }
 .order_list button{
 	font-size: 14pt;

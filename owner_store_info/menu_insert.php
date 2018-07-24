@@ -18,7 +18,27 @@
         return $data;
     }
     
-    $registration_number = $_POST[registration_number];
+    $owner_no = $_POST[owner_no];
+    
+    
+    
+  /*   $db_category_name = $_POST[db_category_name];
+    $menu_no = $_POST[menu_no];
+    $db_menu_name = $_POST[db_menu_name];
+    $db_menu_comp = $_POST[db_menu_comp];
+    $db_menu_price = $_POST[db_menu_price];
+    
+    $db_count = count($db_menu_name);
+    
+    $sql = "select * from menu where owner_no = '$owner_no'";
+    
+    $result = mysqli_query($con, $sql); */
+    
+    
+    
+    
+    
+    
     
     $category_name = $_POST[category_name];
     $menu_name = $_POST[menu_name];
@@ -77,19 +97,22 @@
         }
     }
     
-    $sql = "delete from menu where registation_number = '$registration_number'";
-    mysqli_query($con, $sql);
+   /*  $sql = "delete from menu where registation_number = '$registration_number'";
+    mysqli_query($con, $sql); */
     
     for($i = 0; $i<$count ; $i++){
-        $sql = "insert into menu (registration_number, category_name, menu_name, menu_comp,";
+        $sql = "Update menu set menu_no = menu_no + 1 where owner_no = '$owner_no'";
+        mysqli_query($con, $sql);
+        
+        $sql = "insert into menu (owner_no, menu_no, category_name, menu_name, menu_comp,";
         $sql .= " menu_price, menu_img)";
-        $sql .= " values('$registration_number', '$category_name[$i]', '$menu_name[$i]', '$menu_comp[$i]', '$menu_price[$i]', ";
+        $sql .= " values('$owner_no', '1', '$category_name[$i]', '$menu_name[$i]', '$menu_comp[$i]', '$menu_price[$i]', ";
         $sql .= " '$copied_file_name[$i]')";
         mysqli_query($con, $sql);  // $sql 에 저장된 명령 실행
     }
     
     
-    $sql = "UPDATE store_regi SET menu_ok = 'Y'  WHERE business_license = '$registration_number'";
+    $sql = "UPDATE store_regi SET menu_ok = 'Y'  WHERE no = '$owner_no'";
     mysqli_query($con, $sql);
         
    
@@ -99,7 +122,7 @@
     echo "
 	   <script>
         alert('메뉴가 등록 되었습니다.');
-	    location.href='../owner_order_list/owner_order_list.php';
+	    location.href='../owner_store/owner_store_list.php?mode=info';
 	   </script>
 	";
     

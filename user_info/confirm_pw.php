@@ -23,7 +23,7 @@ if(isset($id)){
 
 <meta charset="UTF-8">
 <title>김윤준이만짐</title>
-<link rel="stylesheet" href="./css/confirm_pw.css?v=2"> 
+<link rel="stylesheet" href="./css/confirm_pw.css?v=3"> 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -34,7 +34,7 @@ if(isset($id)){
 		
 		if(document.getElementById("password").value != document.getElementById("db_pass").value){
 
-			alert(document.getElementById('password').value);
+			alert("비밀번호가 일치하지 않습니다.");
 		}else{
 			location.href="./user_info.php";
 		}
@@ -54,7 +54,7 @@ if(isset($id)){
      		 내 정보 설정을 위해 비밀번호 입력 후, 확인을 눌러주세요.
         </div>
       </div>  
-      <button type="button" onclick="find_pw()">확 인</button>
+      <button type="button" style="margin:8px;" onclick="find_pw()">확 인</button>
       <input id = "db_pass" type='hidden' value="<?= $pass?>">
       <p class="message">우리팀화이팅<br><a href="#">(주) 배달의 신</a></p>
     </form>

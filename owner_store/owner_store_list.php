@@ -8,7 +8,9 @@
         $id = "";
     }
     
-    $sql = "select * from store_regi where owner_id = '$id'";
+    $mode = $_GET[mode];
+    
+    $sql = "select * from store_regi where owner_id = '$id' ";
     
     $result = mysqli_query($con, $sql);
     
@@ -22,11 +24,23 @@
 <meta charset="utf-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="../common_css/common.css?v=1">
-<link rel="stylesheet" href="./css/owner_store_list_style.css?v=5">
+<link rel="stylesheet" href="./css/owner_store_list_style.css?v=6">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>	
+<script >	
 		function tableClicked(){
 			document.store_form.submit();
+		}
+		
+		function clickedDelBtn(a){
+			var mode = a;
+       		var screenW=screen.availWidth; //스크린 가로사이즈
+       		var screenH=screen.availHeight; //스크린 세로사이즈
+       		var popW=600; //띄울 창의 가로사이즈
+       		var popH=1000; //띄울 창의 세로사이즈
+       		var posL=(screenW-popW)/2;
+       		var posT=(screenH-popH)/2;
+       		
+       		window.open('owner_store_del.php','매장 삭제하기', 'width='+popW+', height='+popH +',top='+posT+',left='+posL+', location=no');			
 		}
 
 	</script>
@@ -106,8 +120,21 @@
 		    $regi_ok = $row['regi_ok'];
 		    $menu_ok = $row['menu_ok'];
 		?>
+		<?php 
+		if($mode == "info"){
+		 ?>
+		 <form action="../owner_store_info/manage_form.php" method="post" name="store_form">
+		 <?php  
+		    
+		    
+		}else if($mode == "order"){
+		 ?>  
+		  <form action="../owner_order/owner_order_list.php" method="post" name="store_form">
+		 <?php    
+		}
+		?>
 		
-		<form action="../owner_store_info/manage_form.php" method="post" name="store_form">
+		
 		<input name="owner_no" type="hidden" value="<?= $no ?>">
 		<div class="store_list_info1">
 			<!-- DB에서 불러온 가게수에 따라서 div 생성하면댄다 >내부 내용도 써야함 -->
@@ -145,10 +172,15 @@
 	?>	
 		
 	</div><!-- end of store_list -->
+	<?php 
+	if($mode == "info"){
+	?>
 	<div class="store_btn">
-		<button id=store_regi onclick="location.href='owner_store_regi_form.php'">매장 등록</button><button id=store_del>삭제 신청</button>
+		<button id=store_regi onclick="location.href='owner_store_regi_form.php'">매장 등록</button><button id=store_del type="button" onclick="clickedDelBtn()">삭제 신청</button>
 	</div>
-
+	<?php 
+	}
+	?>
 	<footer>
       <?php include "../common_lib/footer1.php"; ?>
 	</footer>

@@ -113,7 +113,7 @@ body{
 }
 
 .store_list #store_table:hover {
-	background-color: #4c4c4c;
+	background-color: rgba(76, 76, 76, 0.2);
 	cursor:pointer;
 }
 
@@ -176,6 +176,7 @@ body{
 	height: 140px;
 	
 }
+
 
 
 

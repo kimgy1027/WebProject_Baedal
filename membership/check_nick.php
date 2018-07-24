@@ -21,7 +21,7 @@ if(strlen($nick) >= 2 && strlen($nick) <= 10){
 <html>
 <head>
 	<meta charset=utf-8>
-	<link href=../css/join.css rel=stylesheet>
+	<link href="./css/check_id.css?v=1" rel=stylesheet>
 </head>
 <script>
 	// 요소 검사 함수
@@ -33,13 +33,13 @@ if(strlen($nick) >= 2 && strlen($nick) <= 10){
 	}
 	//아이디 검사
 	function nick_check(){
-    	var exp_id= /^[0-9a-zA-Z]{2,10}$/;
+    	var exp_id= /^[0-9a-zA-Z가-힣]{2,10}$/;
     	var id_val= document.id_check_form.nick.value;
 		if(!id_val){
 			alert("닉네임을 입력해주세요");
 			return ;
 		}
-    	if(check_exp(document.id_check_form.nick, exp_id, "닉네임 2~10자리 영문 또는 숫자만 입력해주세요!")){
+    	if(check_exp(document.id_check_form.nick, exp_id, "특수문자는 사용이 불가능합니다!")){
     		document.id_check_form.nick.focus();
     		document.id_check_form.nick.select();
     		return ;
@@ -58,10 +58,10 @@ if(strlen($nick) >= 2 && strlen($nick) <= 10){
 
 </script>
 <body>
-	<div id=wrap>
+	<div class="wrap">
 		<div id=id_check_title>
-			<div id=id_check_title1><img src=../image/pop_idcomf.gif></div>
-			<div id=id_check_title2><a href="#"><img src=../image/pop_login_close.gif onclick="closer()"></a></div>
+			<div id=id_check_title1><img src="./images/닉네임중복확인.jpg" height="30px"></div>
+			<hr>
 		</div>
 		<div class=clear></div>
 		<div id=hr_line></div>
@@ -73,7 +73,7 @@ if(strlen($nick) >= 2 && strlen($nick) <= 10){
 		<br>
 		<form name=id_check_form method=get action="./check_nick.php">
 		<div align=center>
-			<input type="text" name="nick" value="<?=$nick?>"> <a href="#"><img src="../image/idComF.gif" onclick="nick_check()"></a>
+			<input type="text" name="nick" value="<?=$nick?>"> <a href="#"><img id="search" src="./images/검색.jpg" height="30px" onclick="nick_check()"></a>
 		</div>
 		</form>
 		<br>
@@ -92,7 +92,7 @@ if(strlen($nick) >= 2 && strlen($nick) <= 10){
 		<div id=text2 align=center>
 			<b>입력하신 '<font color=red><?=$nick?></font>'는 사용하실 수 있습니다.<br>
 				이 닉네임을 사용하시겠습니까?</b><br><br>
-			<a href="#"><img src="../image/use.gif" onclick="id_use('<?=$nick?>')"></a>
+			<a href="#"><img src="./images/네.jpg"  height="35px"  onclick="id_use('<?=$nick?>')"></a>
 		</div>
 		<?php
 		}

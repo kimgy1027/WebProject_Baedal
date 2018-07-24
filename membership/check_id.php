@@ -21,7 +21,7 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 <html>
 <head>
 	<meta charset=utf-8>
-	<link href="./css/join.css?v=2" rel=stylesheet>
+	<link href="./css/check_id.css?v=1" rel=stylesheet>
 </head>
 <script>
 	// 요소 검사 함수
@@ -92,7 +92,7 @@ if(strlen($id) >= 6 && strlen($id) <= 12){
 		<div id=text2 align=center>
 			<b>입력하신 '<font color=red><?=$id?></font>'는 사용하실 수 있습니다.<br>
 				이 아이디를 사용하시겠습니까?</b><br><br>
-			<a href="#"><img src="../image/use.gif" onclick="id_use('<?=$id?>')"></a>
+			<a href="#"><img src="./images/네.jpg" height="35px" onclick="id_use('<?=$id?>')"></a>
 		</div>
 		<?php
 		}

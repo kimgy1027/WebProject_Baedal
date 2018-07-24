@@ -3,6 +3,35 @@
     
     include '../common_lib/common.php';
     
+    $flag = "NO";
+    $sql = "show tables from web_baedal_DB";
+    $result = mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
+    while($row=mysqli_fetch_row($result)){
+        if($row[0]==="menu"){
+            $flag ="OK";
+            break;
+        }
+    }
+    
+    if($flag!=="OK"){
+        $sql= "create table menu (
+                  owner_no int not null,
+                  menu_no int not null,
+                  category_name char(50) not null,
+                  menu_name char(50) not null,
+                  menu_comp char(50) not null,
+                  menu_price char(50) not null,
+                  menu_img char(50) not null
+               )default charset=utf8;";
+        if(mysqli_query($con,$sql)){
+            echo "<script>alert('menu 테이블이 생성되었습니다.')</script>";
+        }else{
+            echo "실패원인2:".mysqli_query($con);
+        }
+    }
+    
+    
+    
     if(isset($_SESSION[id])){
         $id = $_SESSION[id];
     }
@@ -23,12 +52,14 @@
   $store_name = $row[store_name];
   $business_license = $row[business_license];
   $store_delivery_time = $row[store_delivery_time];
-  
+  $store_origin = $row[store_origin];
+  $store_min_price = $row[store_min_price];
+  $store_payment = $row[store_payment];
   
  
   
   
-  $sql2 = "select distinct category_name from menu where registration_number = '$business_license' order by category_name";
+  $sql2 = "select distinct category_name from menu where owner_no = '$owner_no' order by category_name desc";
   $category_num_result = mysqli_query($con, $sql2);
    
 ?>
@@ -63,7 +94,7 @@
 						"<input class='category_name' type='text' value='"+$(".insert_input").val()+"'> <br>"+
 						"<input class='menu_name' type='text' placeholder='메뉴명'><br>"+
 					    "<textarea class='menu_comp' placeholder='메뉴구성'></textarea><br>" +
-					    "<input class='menu_price' type='text' placeholder='가격'><br>"+
+					    "<input class='menu_price' type='number' placeholder='가격'><br>"+
 					    "<input class='menu_insert_btn' type='button' value='메뉴추가' onclick='add_menu(this)'>*메뉴추가 이후에 이미지를 설정해 줄 수 있습니다! "+
 			    	"</div>"+
 			 "</div>"
@@ -91,7 +122,7 @@
 			    		"<input class='mn_img' name='menu_img[]' type='file' onchange='handleImgFileSelect(this)'><br>"+
 			    		" <img class='sel_img' src='../common_img/사진없음.JPG' accept='image/gif,image/jpeg,image/png' />"+
 			   	 	"</div>"+
-			    "<input class='del_btn' type='button' onclick='del_menu(this)' value='현재 메뉴 삭제'>"+
+			    "<input class='nw_del_btn' type='button' onclick='del_menu(this)' value='현재 메뉴 삭제'>"+
 	   		"</div>"		
 		);
 	
@@ -102,10 +133,36 @@
 	}
 	
 	function del_menu(element){
-			$(element).parent().remove(); //부모요소(이경우 div)를 삭제한다.
+		
+		
+		var menu_no = $(element).closest(".menu_info").find(".db_menu_no").val();
+		var owner_no = <?=json_encode($owner_no)?> ;
+		
+		if(menu_no){
+			var ok = confirm("현재메뉴를 정말 삭제하시겠습니까?");
+			if(ok){
+				$.ajax({
+					type : "post",
+					url : "./menu_del.php",
+					data : "menu_no="+menu_no+"&owner_no="+owner_no,
+					success : function(data){
+						$(element).parent().remove(); //부모요소(이경우 div)를 삭제한다.
+					}
+				});
+			}else{
+				return;
+			}
+			
+		
+		}else{
+			
+			$(element).parent().remove();
+		}
 	}
 	
 	function del_category(element){
+		
+		
 			$(element).closest(".category_area").remove(); //부모요소중 선택자를 사용해 조작할 수 있는 closest;
 	}
 	
@@ -159,6 +216,9 @@
 		
 		document.insert_form.submit();
 	}
+	
+	
+	
 	
 	
 </script>
@@ -316,7 +376,7 @@
                         <section id="panel-1" style="border:1px solid green;">
                           <main>
                           <form class='insert_form' name="insert_form" method="post" action="./menu_insert.php"  enctype="multipart/form-data">
-							<input name="registration_number" type="hidden" value="<?=$business_license?>">	
+							<input name="owner_no" type="hidden" value="<?=$owner_no?>">	
                               	<?php 
                               	for(;$category_row = mysqli_fetch_array($category_num_result);){
                               	    
@@ -332,10 +392,11 @@
                         				</div> 
   
                                    <?php 
-                                   $sql = "select * from menu where registration_number = '$business_license' and category_name = '$category' order by category_name";
+                                   $sql = "select * from menu where owner_no = '$owner_no' and category_name = '$category' order by menu_no desc";
                                    $result  = mysqli_query($con, $sql);
                                    for(;$row = mysqli_fetch_array($result);){
-                                       
+                                       $owner_no = $row[owner_no];
+                                       $menu_no = $row[menu_no];
                                        $category_name = $row[category_name];
                                        $menu_name = $row[menu_name];
                                        $menu_comp = $row[menu_comp];
@@ -345,13 +406,13 @@
                                    ?>
                                     <div class='menu_info'>
                         			<div class='mn_info_input'>
-                            			    <input class='ctgr_name' name='category_name[]' type='text' value='<?= $category_name ?>' readonly><br>
-                            				<input class='mn_name' name='menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
-                            			    <textarea class='mn_comp' name='menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
-                            			    <input class='mn_price' name='menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
+                        			        <input class='db_menu_no' type="text" name="db_menu_no[]" value="<?= $menu_no?>">
+                            			    <input class='ctgr_name' name='db_category_name[]' type='text' value='<?= $category_name ?>' readonly><br>
+                            				<input class='mn_name' name='db_menu_name[]' type='text' value='<?= $menu_name ?>' readonly><br>
+                            			    <textarea class='mn_comp' name='db_menu_comp[]' readonly><?= $menu_comp ?></textarea><br>
+                            			    <input class='mn_price' name='db_menu_price[]' type='text' value='<?= $menu_price ?>' readonly><br>
                         			    </div>
                         			    	<div class='img_area'>
-                        			    		<input class='mn_img' name='menu_img[]' type='file' onchange='handleImgFileSelect(this)'><br>
                         			    		 <img class='sel_img' src='<?= $dir_menu_img?>' accept='image/gif,image/jpeg,image/png' />
                         			   	 	</div>
                         			    <input class='del_btn' type='button' onclick='del_menu(this)' value='현재 메뉴 삭제'>
@@ -368,7 +429,7 @@
                         						<input class='category_name' type='text' value='<?= $category_name ?>'> <br>
                         						<input class='menu_name' type='text' placeholder='메뉴명'><br>
                         					    <textarea class='menu_comp' placeholder='메뉴구성'></textarea><br>
-                        					    <input class='menu_price' type='text' placeholder='가격'><br>
+                        					    <input class='menu_price' type='number' placeholder='가격'><br>
                         					    <input class='menu_insert_btn' type='button' value='메뉴추가' onclick='add_menu(this)'>*메뉴추가 이후에 이미지를 설정해 줄 수 있습니다!
                         			    	</div>
                         				</div>    
@@ -389,12 +450,43 @@
                         </section>
                         <section id="panel-2">
                           <main>
-                            <p>Content2</p>
+                            <table style='border: 1px solid black;'>
+                            	<tr>
+                            		<td>업체정보</td>
+                            	</tr>
+                            	<tr>
+                            		<td>영업시간 : <td><?= $store_delivery_time?>
+                                </tr>
+                                <tr>
+                            		<td>결제정보</td> 
+                            	</tr>
+                            	<tr>
+                            		<td>최소주문금액 :</td> <td><?=$store_min_price ?>
+                            	</tr>
+                            	<tr>
+                            		<td>결제수단 :</td> <td><?=$store_payment ?>
+                            	</tr>
+                            	<tr>
+                            		<td>사업자 정보</td> 
+                            	</tr>
+                            	<tr>
+                            		<td>상호명 :</td> <td><?=$store_name ?>
+                            	</tr>
+                            	<tr>
+                            		<td>사업자 등록번호 :</td> <td><?= $business_license ?>
+                            	</tr>
+                                <tr>
+                            		<td>원산지 정보</td> 
+                            	</tr>
+                            	<tr>
+                            		<td>사업자 등록번호 :</td> <td><?= $store_origin ?>
+                            	</tr>                       	
+                            </table>
                           </main>
                         </section>
                         <section id="panel-3">
                           <main>
-                            <p>Content3</p>
+                            <?php include "./ripple_view.php"?>
                           </main>
                         </section>
                       </div>
@@ -430,6 +522,6 @@
 
 	<footer>
       <?php include "../common_lib/footer1.php"; ?>
-	</footer>
+	</footer> 
 </body>
 </html>

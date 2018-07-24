@@ -14,6 +14,7 @@
 	border-radius: 5px;
 	padding: 10px;
 	font-family: 'NANUMSQUARER';
+
 }
 
 .wrap input{
@@ -24,4 +25,22 @@
 
 .wrap #search{
 	vertical-align: middle;
+}
+.wrap #email_code{
+	height : 34px;
+}
+.wrap #email_btn{
+	height : 34px;
+}
+
+.wrap #close{
+	cursor: pointer;
+		vertical-align: middle;
+	
+	
+}
+.wrap #email_btn{
+	cursor: pointer;
+		vertical-align: middle;
+	
 }

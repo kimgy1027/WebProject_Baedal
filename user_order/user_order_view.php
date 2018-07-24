@@ -5,6 +5,8 @@ $id = $_SESSION['id'];
 
 include "../common_lib/common.php";
 
+$no = $_GET['no'];
+
 $sql= "select * from order_list where id='$id' order by no desc";
 $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 ?>
@@ -13,9 +15,9 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 <html>
 <head>
 	<meta charset="utf-8">
-    <title>배달 홈페이지</title>
-    <link rel="stylesheet" href="../common_css/common.css?v=4">
-    <link rel="stylesheet" href="./css/user_order_list.css?v=6">
+    <title>배달내역 자세히보기</title>
+    <link rel="stylesheet" href="../common_css/common.css?v=1">
+    <link rel="stylesheet" href="./css/user_order_view.css?v=1">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 	 function popupFunc(a){
@@ -34,13 +36,10 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 		var no = a; //order_list의 no
 		var screenW=screen.availWidth; //스크린 가로사이즈
  		var screenH=screen.availHeight; //스크린 세로사이즈
- 		var popW=600; //띄울 창의 가로사이즈
- 		var popH=800; //띄울 창의 세로사이즈
+ 		var popW=440; //띄울 창의 가로사이즈
+ 		var popH=450; //띄울 창의 세로사이즈
  		var posL=(screenW-popW)/2;
  		var posT=(screenH-popH)/2;
-	 
-		window.open('./user_order_view.php?no='+no,'주문내역 자세히보기', 'width='+popW+', height='+popH +',top='+posT+',left='+posL, 'location=no,status=no,scrollbars=no');
-
 	 }
 	</script>
 </head>
@@ -58,7 +57,7 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 	</nav>
     
     <div class="location">
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 홈&nbsp; &nbsp; > &nbsp; &nbsp;주문내역</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 홈 > 주문내역</p>
       <hr>
    </div>
 	

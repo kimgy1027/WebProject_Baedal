@@ -16,7 +16,7 @@ if(!isset($_SESSION['code'])){
 <head>
 <title>이메일 인증</title>
 <meta charset="utf-8">
-<link href="../css/check_email.css?ver1" rel="stylesheet" type="text/css">
+<link href="./css/check_id.css?v=2" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 		
@@ -71,24 +71,25 @@ if(!isset($_SESSION['code'])){
 </script>
 </head>
 <body>
-	<div id="frame">
-		<b>이메일 인증</b>
-		<button id="close" onclick="closer()">CLOSE X</button>
+	<div class="wrap" align="center">
+	<div id=id_check_title1 align="left"><img src="./images/이메일인증하기.jpg" height="34px"></div>
+	
 		<hr>
-		<div id="message2">
+		<div id="text1">
 			이메일 인증이 필요합니다.<br> 입력하신 이메일 주소로 인증번호를 요청합니다.
 		</div>
-		<div id="check">
+		<div id="text1">
 		
-		 <?=$email;?> 로 인증번호 전송!
+		<i><?=$email;?></i> 로 인증번호 전송!
 		
 			
 		</div>
 		<hr>
 		<div id="accept">
-		<input id="email_code" type="text"><input type="button" onclick="check_email_conf('<?=$code?>','<?=$email?>')"
-		 value="인증확인">
-		<div id="conf_time" style="color : blue"></div>
+		<input id="email_code" type="text"><div id="conf_time" style="color : blue; font-size: 13pt; font-weight:bold; display:inline-block;"></div>
+		<br><br><img id="email_btn" src="./images/인증확인.jpg" onclick="check_email_conf('<?=$code?>','<?=$email?>')" height="34px">
+         <img src="./images/닫기.jpg" height="33px" onclick="closer()" id="close">
+		
 		
 		</div>
 

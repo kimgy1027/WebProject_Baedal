@@ -1,19 +1,59 @@
 <?php 
     session_start();
-    
+    include '../common_lib/common.php';
     if(isset($_SESSION[id])){
         $id = $_SESSION[id];
     }else{
         $id = "";
     }
     
+    $flag = "NO";
+    $sql = "show tables from web_baedal_DB";
+    $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
+    while($row=mysqli_fetch_row($result)){
+        if($row[0]==="store_regi"){
+            $flag = "OK";
+            break;
+        }
+    }
     
-
-//   session_start();
-//   include "../common_lib/common.php";
-  
-
-// ?>
+    if($flag !=="OK"){
+        $sql = "create table store_regi(
+      no int not null AUTO_INCREMENT,
+      owner_id varchar(10) not null,
+      owner_name varchar(10) not null,
+      owner_store_name varchar(50) not null,
+      owner_address varchar(50) not null,
+      business_license varchar(50) not null,
+      business_license_img varchar(50) not null,
+      store_name varchar(50) not null,
+      store_type varchar(50) not null,
+      store_origin varchar(100) not null,
+      store_delivery_time varchar(50) not null,
+      store_day_off varchar(50) not null,
+      store_phone varchar(50) not null,
+      store_min_price varchar(50) not null,
+      store_payment varchar(50) not null,
+      store_delivery_area varchar(255) not null,
+      store_logo_img varchar(50) not null,
+      regi_date varchar(20) not null,
+      regi_ok varchar(2) default 'N',
+      menu_ok varchar(2) default 'N',
+      primary key(no)
+    )";
+        if(mysqli_query($con, $sql)){
+            echo "<script>
+        alert('store_regi 테이블이 생성되었습니다!');
+      </script>";
+            
+        }else{
+            echo "<script>
+        alert('store_regi 테이블 생성실패');
+      </script>";
+        }
+    }  
+    
+    ?>
 
 <!DOCTYPE html>
 <html>
@@ -361,14 +401,16 @@
                                             <option value="063">063</option>
                                             <option value="064">064</option>
                                          </select> - <input type="text"  name="store_phone2" id="block3"> - <input type="text"  name="store_phone3" id="block3">
+        		<tr><td class="td1">최소주문 금액<td class="td2"><input type="number" name="min_price">
+        		<tr><td class="td1">결제수단<td class="td2"> <input type="text" name="payment">
         		<tr><td class="td1">배달가능지역<td class="td2">
-        		<input id="asearch" type="text" placeholder="예)동 이름을 입력해주세요" onkeyup="search_func()"> <div id="src_rst"><div id="s_r_l" style="border: 1px solid black;"></div></div>
+        		<input id="asearch" type="text" placeholder="예)동 이름을 입력해주세요" onkeyup="search_func()"> <div id="src_rst"><div id="s_r_l" ></div></div>
         		<textarea name="store_delivery_area" id="store_delivery_area"></textarea>
         		<td><input class="content" type="file" id="store_logo_img" name="store_logo_img" onchange="handleImgFileSelect(this,1)"> 
         	</table>        	
     	</div><!-- end of store_info -->
     	<div class="store_regi_btn">
-    		<button type='button' onclick="inputStore()">등 록</button><button>취 소</button>
+    		<button type='button' onclick="inputStore()">등 록</button><button type="button" onclick="javascript:history.go(-1)">취 소</button>
     	</div>
 	</div><!-- end of store_regi-->
 	

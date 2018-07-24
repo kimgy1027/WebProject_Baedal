@@ -290,7 +290,7 @@ d1:after{
   display: none; 
   width: 900px;
   margin-left: -450px;
-  margin-top: -450px;
+  margin-top: -300px;
   top: 50%;
   left: 50%;
   z-index: 30;

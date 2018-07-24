@@ -262,7 +262,7 @@ main p {
 
 /*장바구니 가장 큰 div*/
 .cart_view{
-   height: 1200px;
+   /* height: 1200px; */
    display: inline-block;
    width: 30%;
    margin: 0 auto;

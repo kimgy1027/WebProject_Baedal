@@ -8,7 +8,6 @@ if(isset($_POST['my_nick']) && isset($_POST['nick'])){
     $my_nick = $_POST['my_nick'];
     $nick = $_POST['nick'];
     
-    var_dump($my_nick.$nick);
     
     if($my_nick == $nick){
         $now_nick = true;
@@ -102,7 +101,7 @@ function nick_use(nick){
 		<form name=id_check_form method=post action="modify_nick.php">
 		<div align="center">
 			<input type="text" name="nick" id="nick" placeholder="닉네임을 입력하시오"/> <img id="search" src="./images/검색.jpg" height="30px" onclick="nick_check()">
-			<input type="text" name="my_nick" id="db_nick" value="<?=$my_nick?>" readonly>
+			<input type="hidden" name="my_nick" id="db_nick" value="<?=$my_nick?>" readonly>
 		</div>
 		</form>
 		<br>
@@ -130,7 +129,7 @@ function nick_use(nick){
 		<div id=text2 align=center>
 			<b>입력하신 '<font color=red><?=$nick?></font>'는 사용하실 수 있습니다.<br>
 				이 닉네임을 사용하시겠습니까?</b><br><br>
-			<img src="../image/use.gif" onclick="nick_use('<?=$nick?>')">
+			<button type="button" style="font-weight:bold; background:#2ac1bc; color:#FFFFFF; width:70px; height: 30px;" onclick="nick_use('<?=$nick?>')">확 인</button>
 		</div>
 		<?php
 		}

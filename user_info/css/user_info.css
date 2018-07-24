@@ -4,6 +4,7 @@
 	width: 1100px;
 	margin: 0 auto;
 	border: 1px black solid;
+	background: #FFFFFF;
 }
 
 .my_info , .like_store_info, .review_info{
@@ -24,7 +25,7 @@
 .my_info .td1 {
 	width: 25%;
 	height: 50px;
-	border-right: 3px gray dashed;
+	border-right: 3px white dashed;
 	padding-left: 20px;
 	background-color: #DEDEDE;
 }
@@ -34,17 +35,43 @@
 .my_info input {
 	height: 32px;
 	font-size: 12pt;
+	background: #f2f2f2;
 }
 
 .my_info button {
 	height: 37px;
 	width: 60px;
 	font-size: 12pt;
-	background-color: #c0c0c0;
+	background-color: #808080;
+	color: #FFFFFF;
 }
 .my_info button:hover{
 	cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

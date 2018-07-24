@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset=utf-8>
-	<link href=../css/join.css rel=stylesheet>
+	<link href=./css/check_id.css?v=2 rel=stylesheet>
 </head>
 	<script>
     	function check_exp(elem, exp, msg){
@@ -46,10 +46,10 @@
     	}
 	</script>
 <body>
-	<div id=wrap>
+	<div class="wrap">
 		<div id=id_check_title>
-			<div id=id_check_title1><img src="../image/email_conf_title.jpg"></div>
-			<div id=id_check_title2><a href="#"><img src="../image/pop_login_close.gif" onclick="closer()"></a></div>
+			<div id=id_check_title1><img src="./images/이메일인증하기.jpg" height="30px"></div>
+			<hr>
 		</div>
 		<div class=clear></div>
 		<div id=hr_line></div>
@@ -60,10 +60,10 @@
 		</div>
 		<br>
 		<form name=email_check_form method="post" action="./phpmailer/send_email.php">
-		<div align=center>
+		<div align=center id="input_email">
 			<input type="text" name="email1" size="10"> @
 			<input type="text" name="email2" size="10"> 
-			<a href="#"><img src="../image/email_conf_receive.jpg" onclick="check_email_conf()"></a>
+			<a href="#"><img src="./images/보내기.jpg" onclick="check_email_conf()" height="33px" id="search"></a>
 		</div>
 		</form>
 		<br>

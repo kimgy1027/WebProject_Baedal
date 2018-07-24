@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+.sales_info{
+	width:1100px;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.no_store_img{
+	height: 500px;
+	margin: 0 auto;
+	text-align: center;	
+	line-height: 600px;
+}
+.no_store_img img{
+	width: 75%;
+}
+.check_boxs{
+	margin: 0 auto;	
+	width: 100%;
+}
+.check_box{
+	display: inline-block;
+}
+
+/*제목 스타일 설정*/
+.click_contents1{
+	height: 40px;
+	background-color: #fedabc;
+	padding-left: 20px;
+	line-height: 36px;
+	border-bottom: 3px dashed white;
+	cursor: pointer;
+} 
+.click_contents2, .click_contents3{
+	height: 40px;
+	background-color: #dddddd;
+	padding-left: 20px;
+	line-height: 36px;
+	border-bottom: 3px dashed white;
+	cursor: pointer;
+}
+
+/*체크박스 스타일 설정*/
+.check_box{	
+	padding: 20px 20px 0px 20px;
+}
+.check_box{
+	margin-right:30px;
+	margin-bottom:20px;
+}
+.check_box input{
+	width:30px; height:18px;
+}
+.check_box_btn{
+	width: 100%;
+	text-align: center;
+	padding: 0 0 20px 0;
+
+}
+.check_box_btn button{
+	height: 36px;
+	width: 62px;
+	background-color: #17dee3;	
+	border: none;
+	font-family: 'NANUMSQUARER';
+	font-size: 12pt;
+	font-weight: bold;
+}
+/*데이트픽커 스타일*/
+.select_date{
+	width:100%;
+	text-align: right;
+}
+.select_date input{
+	height: 30px;
+	font-family: 'NANUMSQUARER';
+	font-size: 12pt;
+	font-weight: bold;
+}
+.select_date img{
+	height: 35px;
+	vertical-align: middle;
+	margin-right: 30px;
+	cursor: pointer;
+}
+
+
+/*매출 테이블 스타일*/
+.total_sales{
+	width:100%;
+	border:1px solid red;
+}
+
+.total_sales_list table{
+	width: 33%;
+	height: 200px;
+	border: 2px solid #fddcc4;	
+	display: inline-table;
+}
+.total_sales_list .tr1 .td2{
+	color:gray;
+	font-size: 10pt;
+	width: 72%;
+}
+.total_sales_list .tr2 .td1{
+	text-align:center;
+	font-size: 30pt;
+}
+.total_sales_list .td1{
+	padding-left:10px;
+}
+.total_sales_list .tr3 .td2{
+	padding-right:15px;
+	text-align:right;
+	color:gray;
+	font-size: 10pt;
+}
+.total_sales_list .tr0 .td1{
+	background-color: #ffebd7;
+}

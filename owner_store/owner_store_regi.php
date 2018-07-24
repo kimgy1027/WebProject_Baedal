@@ -16,7 +16,11 @@ $store_delivery_time = $_POST['store_delivery_time_start']."~".$_POST['store_del
 $store_day_off = $_POST['store_day_off']; //휴무일
 $store_phone = $_POST['store_phone1']."-".$_POST['store_phone2']."-".$_POST['store_phone3']; //전화번호
 $store_delivery_area = $_POST['store_delivery_area']; //배달지역
+$store_min_price = $_POST['min_price']; //최소주문 가격
+$store_payment = $_POST['payment']; //결제수단
 $store_logo_img = $_FILES['store_logo_img'];
+
+
 
 
 $upload_dir = './Regi_logo_img_data/';
@@ -103,53 +107,6 @@ if (!$store_logo_error && !$business_upfile_error)
         
 }
 
-
-
-
-
-  $flag = "NO";
-  $sql = "show tables from web_baedal_DB";
-  $result = mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
-  while($row=mysqli_fetch_row($result)){
-    if($row[0]==="store_regi"){
-      $flag = "OK";
-      break;
-    }
-  }
-  
-  if($flag !=="OK"){
-      $sql = "create table store_regi(
-      no int not null AUTO_INCREMENT,
-      owner_id varchar(10) not null,
-      owner_name varchar(10) not null,
-      owner_store_name varchar(50) not null,
-      owner_address varchar(50) not null,
-      business_license varchar(50) not null,
-      business_license_img varchar(50) not null,
-      store_name varchar(50) not null,
-      store_type varchar(50) not null,
-      store_origin varchar(100) not null,
-      store_delivery_time varchar(50) not null,
-      store_day_off varchar(50) not null,
-      store_phone varchar(50) not null,
-      store_delivery_area varchar(255) not null,
-      store_logo_img varchar(50) not null,
-      regi_date varchar(20) not null,
-      regi_ok varchar(2) default 'N',
-      menu_ok varchar(2) default 'N',
-      primary key(no)
-    )";
-    if(mysqli_query($con, $sql)){
-      echo "<script>
-        alert('store_regi 테이블이 생성되었습니다!');
-      </script>";
-      
-    }else{
-      echo "<script>
-        alert('store_regi 테이블 생성실패');
-      </script>";
-    }
-  }  
   
   $today = date("Y/m/d");
   
@@ -164,10 +121,10 @@ if (!$store_logo_error && !$business_upfile_error)
   }else{
       $sql = "insert into store_regi (owner_id, owner_name, owner_store_name, owner_address, ";
       $sql .= "business_license, business_license_img, store_name, store_type, store_origin, store_delivery_time, ";
-      $sql .= "store_day_off, store_phone, store_delivery_area, store_logo_img, regi_date) ";
+      $sql .= "store_day_off, store_phone, store_min_price, store_payment, store_delivery_area, store_logo_img, regi_date) ";
       $sql .= "values ('$owner_id', '$owner_name', '$owner_store_name', '$owner_address', ";
       $sql .= "'$business_license', '$copied_business_file_name', '$store_name', '$store_type', '$store_origin', '$store_delivery_time', ";
-      $sql .= "'$store_day_off', '$store_phone', '$store_delivery_area', '$copied_store_file_name', '$today')";
+      $sql .= "'$store_day_off', '$store_phone', '$store_min_price', '$store_payment', '$store_delivery_area', '$copied_store_file_name', '$today')";
  
              mysqli_query($con, $sql) or die("실패원인: ".mysqli_error($con));
   }
@@ -175,7 +132,7 @@ if (!$store_logo_error && !$business_upfile_error)
   mysqli_close($con);
   
   echo "<script>alert('매장 등록 신청이 완료되었습니다.')</script>";
-  echo "<script> location.href='../owner_store/owner_store_list.php'; </script>";
+  echo "<script> location.href='../owner_store/owner_store_list.php?mode=info'; </script>";
   
 
 
