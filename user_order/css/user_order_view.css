@@ -1,1 +1,148 @@
 @charset "UTF-8";
+
+@font-face {
+	font-family: 'NANUMSQUARER';
+	src: url(../../common_css/font/NANUMSQUARER.ttf);
+}
+.order_info_view{
+	font-size: 11pt;
+}
+/*가게정보 테이블*/
+.store_info table{
+	text-align: center;
+	width: 95%;
+	margin:0 auto;
+}
+.store_info td{
+	height: 40px;
+}
+.store_info.td1{
+	text-align:center;
+} 
+.store_info .tr1 .td1{
+	font-size: 25pt;	
+	height: 50px;
+	border-bottom: 2px solid #c0c0c0;
+	padding-top: 10px;
+}
+.store_info #review img{
+	height: 35px;
+	vertical-align: middle;
+}
+.store_info #order img{
+	height: 30px;
+	vertical-align: middle;
+	
+}
+.store_info button{
+	border: none;
+	cursor: pointer;
+	margin: 10px;
+	border-radius: 4px;
+}
+.store_info #order{
+	background-color: #1dbca8;
+	padding: 11px 20px 11px 20px;
+}
+.store_info #review{
+	background-color: white;
+	border: solid gray 1px;
+	padding: 7px 15px 7px 15px;
+}
+
+.order_info_view{
+	font-family: 'NANUMSQUARER';
+	font-weight: bold;
+	width:500px;
+	border: 1px black solid;
+}
+
+.order_info, .delivery_info, .menu_info, .store_info{
+	width:100%;
+	margin-bottom: 20px;
+}
+/*주문정보테이블*/
+.order_info table{
+	border: 1px #5a5a5a solid;
+	width: 95%;
+	margin: 0 auto;
+}
+.order_info td{
+	height: 35px;
+	padding-left: 10px;
+}
+.order_info .tr1 td{
+	border-bottom : 3px #c0c0c0 dashed;
+}
+.order_info .tr2 td, .order_info .tr3 td,.order_info .tr4 td,.order_info .tr5 td{
+	border-bottom : 1px solid #c0c0c0;
+}
+.order_info .td1{
+	width: 30%;
+	text-align: center;
+}
+
+/*배달정보 테이블*/
+.delivery_info table{
+	border: 1px #808080 solid;
+	width: 95%;
+	margin: 0 auto;
+}
+.delivery_info td{
+	height: 35px;
+	padding-left: 10px;
+}
+.delivery_info .tr1 td{
+	border-bottom : 3px #c0c0c0 dashed;
+}
+.delivery_info .tr2 td, .delivery_info .tr3 td,.delivery_info .tr4 td,.delivery_info .tr5 td{
+	border-bottom : 1px solid #c0c0c0;
+}
+.delivery_info .td1{
+	width: 30%;
+	text-align: center;
+}
+
+
+/*메뉴정보 테이블*/
+.menu_info table{
+	border: 1px #808080 solid;
+	width: 95%;
+	margin: 0 auto;
+}
+.menu_info td{
+	height: 35px;
+	padding-left: 10px;
+}
+.menu_info .tr1 td{
+	border-bottom : 3px #c0c0c0 dashed;
+}
+.menu_info .tr2 td, .menu_info .tr3 td,.menu_info .tr4 td,.menu_info .tr5 td{
+	border-bottom : 1px solid #c0c0c0;
+}
+.menu_info .td1{
+	width: 30%;
+	text-align: center;
+}
+.meun_info .td2{
+	text_align: center;
+}
+.menu_info .tr4 td{
+	background-color: #dfdfdf;
+}
+/*연락처정보*/
+.call_info{
+	width: 100%;
+	background-color: #e1e1e1;
+	color: gray;
+	text-align: center;
+}
+
+/*테이블 전체 조절*/
+.order_info .tr1 .td1,.delivery_info .tr1 .td1, .menu_info .tr1 .td1{
+	font-size: 14pt;
+}
+
+.order_info_view .td2{
+	padding-left: 30px;
+}

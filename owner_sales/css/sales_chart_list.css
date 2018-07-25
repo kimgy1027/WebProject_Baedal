@@ -20,6 +20,7 @@
 }
 .check_box{
 	display: inline-block;
+	line-height: -100px;
 }
 
 /*제목 스타일 설정*/
@@ -42,12 +43,10 @@
 
 /*체크박스 스타일 설정*/
 .check_box{	
-	padding: 20px 20px 0px 20px;
+	padding: 20px 20px 5px 20px;
+	font-size: 12pt;
 }
-.check_box{
-	margin-right:30px;
-	margin-bottom:20px;
-}
+
 .check_box input{
 	width:30px; height:18px;
 }
@@ -118,3 +117,4 @@
 .total_sales_list .tr0 .td1{
 	background-color: #ffebd7;
 }
+

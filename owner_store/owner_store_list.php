@@ -28,7 +28,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script >	
 		function tableClicked(){
-			document.store_form.submit();
+			var n = $(this).index(this);
+			alert(n);
+			$(".store_form:eq("+n+")").submit();
 		}
 		
 		function clickedDelBtn(a){
@@ -123,13 +125,13 @@
 		<?php 
 		if($mode == "info"){
 		 ?>
-		 <form action="../owner_store_info/manage_form.php" method="post" name="store_form">
+		 <form class="store_form" action="../owner_store_info/manage_form.php" method="post" name="store_form">
 		 <?php  
 		    
 		    
 		}else if($mode == "order"){
 		 ?>  
-		  <form action="../owner_order/owner_order_list.php" method="post" name="store_form">
+		  <form class="store_form" action="../owner_order/owner_order_list.php" method="post" name="store_form">
 		 <?php    
 		}
 		?>
@@ -139,7 +141,7 @@
 		<div class="store_list_info1">
 			<!-- DB에서 불러온 가게수에 따라서 div 생성하면댄다 >내부 내용도 써야함 -->
 		
-			<table onclick="tableClicked()" id="store_table">
+			<table onclick="tableClicked()" id="store_table" class="store_table">
 			
 				<tr>
 					<td rowspan="4" id=store_list_img><img id="store_logo_img" src="./Regi_logo_img_data/<?=$store_logo_img ?>" >					

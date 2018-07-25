@@ -3,20 +3,18 @@
 .order_info{
 	width: 1100px;
 	margin: 0 auto;
-	border: 1px solid black;
 }
 
 .order_list{
 	width: 1000px;
 	margin: 0 auto;
-	border: 1px solid blue;
 }
 
 .order_list table{
 	width: 100%;
-	height: 110px;
 	border: 2px solid black;	
 	margin-top: 20px;
+	background-color: #f7f9f9;
 }
 
 .order_list .tr1 .td1{
@@ -49,6 +47,7 @@
 .order_list .tr1 #look{
 	height: 30px;
 	cursor: pointer;
+	vertical-align: bottom;
 }
 .order_list button{
 	font-size: 14pt;
@@ -69,12 +68,13 @@
 .order_list .tr2 img, .tr3 img{
 	height: 20px;
 }
-
-
-
-
-
-
+/*테이블내 글자 정렬 좀 햇음*/
+.order_list .tr1 .td2, .order_list .tr1 .td3{
+	vertical-align: bottom;
+}
+.order_list .tr3 .td2, .order_list .tr3 .td3{
+	vertical-align: top;
+}
 
 
 

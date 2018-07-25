@@ -19,7 +19,7 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
     <link rel="stylesheet" href="../common_css/common.css?v=1">
-    <link rel="stylesheet" href="./css/sales_chart_list.css?v=10">
+    <link rel="stylesheet" href="./css/sales_chart_list.css?v=11">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
     	var checkbox_view = "n";
@@ -40,15 +40,15 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
     	
     	function selectedDate(){
     		var selected_date = $("#date_picker").val();
-    		var business_license =[]; //배열초기화
+    		var owner_no =[]; //배열초기화
      		$("input[id='check']:checked").each(function() { 
-     			business_license.push($(this).val()); //체크된 것만 뽑아서 배열에 넣어준다
+     			owner_no.push($(this).val()); //체크된 것만 뽑아서 배열에 넣어준다
      	   });
 			
     		$.ajax({
 				type : "post",
 				url : "./total_sales.php",
-				data : { 'business_license' : business_license, 'selected_date' : selected_date },
+				data : { 'owner_no' : owner_no, 'selected_date' : selected_date },
 				success : function(data){
 					$(".total_sales").show();
 					$(".total_sales_list").html(data);
@@ -59,7 +59,7 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
     		$.ajax({
 				type : "post",
 				url : "./week_sales_chart.php",
-				data : { 'business_license' : business_license, 'selected_date' : selected_date },
+				data : { 'owner_no' : owner_no, 'selected_date' : selected_date },
 				success : function(data){
 					$(".total_sales_list2").html(data);
 				}
@@ -114,7 +114,7 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 				data : { 'owner_no' : owner_no, 'selected_date' : selected_date },
 				success : function(data){
 					$(".menu_sales").show();
-					$(".menu_sales_list").html(data);
+					$(".sales_menu_list").html(data);
 				}
 			});
     		$('.click_contents3').css('background-color','#fedabc');

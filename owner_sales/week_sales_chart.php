@@ -14,7 +14,7 @@ include "../common_lib/common.php";
     
  
         $owner_no = $_POST['owner_no'];
-        $count=count($business_license); //체크된 전체 매장의 개수  = 배열의 수;
+        $count=count($owner_no); //체크된 전체 매장의 개수  = 배열의 수;
 
         $week_total0 =[]; //1 매장별 총 매출액을 넣을 배열 선언
         $week_total1 =[]; 
@@ -27,7 +27,7 @@ include "../common_lib/common.php";
         $store_name=[]; //매장 이름을 넣을 배열 선언
  
     $i=0;
-    while(isset($business_license[$i])){   
+    while(isset($owner_no[$i])){   
         $sql0= "select * from order_list where owner_no='$owner_no[$i]' and state='end' and order_date = '$today_6'"; //주간 총매출 구하기
         $result0= mysqli_query($con, $sql0) or die("실패원인:".mysqli_error($con));
         
@@ -216,7 +216,7 @@ include "../common_lib/common.php";
         chart: {
 
         },
-        width: 1000,
+        width: 925,
         height: 500,
         linewidth : 15,
         axes: {
@@ -235,6 +235,6 @@ include "../common_lib/common.php";
 </head>
 <body>
 	<div class="chart_title"><p>7일간 판매액 그래프 <small>단위 (만 원)</small></p></div>
- 	 <div id="line_top_x"></div>
+ 	 <table><tr><td style="width: 50px;"><td><div id="line_top_x"></div></table>
 </body>
 </html>

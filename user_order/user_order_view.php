@@ -5,10 +5,38 @@ $id = $_SESSION['id'];
 
 include "../common_lib/common.php";
 
-$no = $_GET['no'];
+$no = $_GET['no']; //order_list의 PK
 
-$sql= "select * from order_list where id='$id' order by no desc";
+
+$sql= "select * from order_list where no='$no'";
 $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
+
+$row=mysqli_fetch_array($result);
+//주문정보//
+$owner_no=$row['owner_no']; //store_regi의 PK
+$order_date=$row['order_date'];
+$order_time=$row['order_time'];
+$pay=$row['pay'];
+$total=$row['total'];
+
+//배달정보//
+$phone=$row['phone'];
+$address=$row['address'];
+$request=$row['request'];
+
+$sql="select store_name from store_regi where no=$owner_no";
+$result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
+$row=mysqli_fetch_array($result);
+
+$store_name=$row['store_name'];
+
+//주문내역정보//
+$sql2="select*from cart where cart_num='$no'";
+$result2= mysqli_query($con, $sql2) or die("실패원인1:".mysqli_error($con));
+
+//리뷰 정보
+$sql3="select*from review where order_no='$no'";
+$result3= mysqli_query($con, $sql3) or die("실패원인1:".mysqli_error($con));
 ?>
 
 <!DOCTYPE html>
@@ -16,107 +44,64 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 <head>
 	<meta charset="utf-8">
     <title>배달내역 자세히보기</title>
-    <link rel="stylesheet" href="../common_css/common.css?v=1">
-    <link rel="stylesheet" href="./css/user_order_view.css?v=1">
+    <link rel="stylesheet" href="./css/user_order_view.css?v=5">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
-	 function popupFunc(a){
-    		var no = a; //store_regi의 no
-    		var screenW=screen.availWidth; //스크린 가로사이즈
-    		var screenH=screen.availHeight; //스크린 세로사이즈
-    		var popW=440; //띄울 창의 가로사이즈
-    		var popH=450; //띄울 창의 세로사이즈
-    		var posL=(screenW-popW)/2;
-    		var posT=(screenH-popH)/2;
-
-    		window.open('./review.php?no='+no,'리뷰 남기기', 'width='+popW+', height='+popH +',top='+posT+',left='+posL, 'location=no,status=no,scrollbars=no');
-    	}
-	 
-	 function look_more(a){
-		var no = a; //order_list의 no
-		var screenW=screen.availWidth; //스크린 가로사이즈
- 		var screenH=screen.availHeight; //스크린 세로사이즈
- 		var popW=440; //띄울 창의 가로사이즈
- 		var popH=450; //띄울 창의 세로사이즈
- 		var posL=(screenW-popW)/2;
- 		var posT=(screenH-popH)/2;
-	 }
 	</script>
 </head>
 <body>
-	<header>
-		<?php include "../common_lib/top_login2.php"; ?>
-	</header>
+	<div class="order_info_view">
+		<div class="store_info">
+			<table>
+			<tr class="tr1"><td class="td1"><?=$store_name?>
+			<tr class="tr2"><td class="td1"><button id="order" type="button" onclick="location.href='../store/store_view.php?no=<?=$owner_no ?>'"><img  src="../common_img/주문하기.jpg"></button>
+			<?php if(!mysqli_num_rows($result3)){?>
+			<button id="review" type="button" onclick="popupFunc(<?= $owner_no?>)"><img src="../common_img/리뷰쓰기.jpg"></button>
+			<?php }?>
+			</table>
+		</div>
 	
-	<div class="logo">
-		<a href="../index.php"><img alt="logo" src="../common_img/logo.JPG"></a>
+		<div class="order_info">
+			<table>
+			<tr class="tr1"><td class="td1">주문정보<td class="td2">
+			<tr class="tr2"><td class="td1">주문번호<td class="td2"><?= $no ?>
+			<tr class="tr3"><td class="td1">주문시간<td class="td2"><?= $order_date ?> <?= $order_time?>
+			<tr class="tr4"><td class="td1">주문방법<td class="td2"><?php if($pay=="now_card"){?>카드 결제
+			                                                    <?php }else if($pay=="after_cash"){?>만나서 현금 결제
+			                                                    <?php }else{?>만나서 카드 결제<?php } ?>
+			<tr class="tr5"><td class="td1">결제금액<td class="td2"><font color="red"><?= $total ?></font>
+			</table>
+		</div>
+		
+		<div class="delivery_info">
+			<table>
+			<tr class="tr1"><td class="td1">배달정보<td class="td2">
+			<tr class="tr2"><td class="td1">연락처<td class="td2"><?= $phone ?>
+			<tr class="tr3"><td class="td1">배달주소<td class="td2"><?= $address ?>
+			<tr class="tr4"><td class="td1">요청사항<td class="td2"><?= $request ?>
+			</table>
+		</div>
+		
+		<div class="menu_info">
+		 	<table>
+			<tr class="tr1"><td class="td1">주문내역<td class="td2">
+			<?php while($row=mysqli_fetch_array($result2)){
+			         $menu_name=$row['menu_name'];
+			         $menu_price=$row['menu_price'];
+			         $menu_count=$row['menu_count']; ?>
+			         
+         			<tr class="tr2"><td class="td1"><?= $menu_name ?><td class="td2"><?= $menu_price?>
+        			<tr class="tr3"><td class="td1">수 량<td class="td2"><?= $menu_count ?>        			
+			<?php }?>
+					<tr class="tr4"><td class="td1">주문금액<td class="td2"><?= $total ?>
+			</table>
+		</div>
+		<div class="call_info">
+			<small>배달의신 콜센터</small>
+			<div style="font-size: 16pt">1644-0025</div>
+			<small>(24시간 운영, 연중무휴)</small>
+		</div>
 	</div>
 
-	<nav>
-		<?php include "../common_lib/menu1_2.php"; ?>
-	</nav>
-    
-    <div class="location">
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 홈 > 주문내역</p>
-      <hr>
-   </div>
-	
-	<div class="order_info">
-		<div class="order_list">
-	<?php if(!mysqli_num_rows($result)){?> <!-- 주문내역이 없는 경우에 ~ -->
-		<img id="no_order_img" alt="no_order" src="../common_img/주문내역없음.JPG">
-	
-	<?php }else{
-	       while($row=mysqli_fetch_array($result)){
-	        $no=$row['no']; //주문번호는 자세히 보기창 구현에 쓰임
-	        $business_license=$row['business_license'];
-	        $order_date=$row['order_date'];
-	        $order_time=$row['order_time'];
-	        $total=$row['total'];
-	        $pay=$row['pay'];
-	        $state=$row['state'];
-	        
-	        $sql2= "select * from store_regi where business_license='$business_license'";
-	        $result2= mysqli_query($con, $sql2) or die("실패원인2:".mysqli_error($con));
-	        
-	        $row2=mysqli_fetch_array($result2);
-	        $store_no=$row2['no'];
-	        $store_name=$row2['store_name'];
-	        
-	        ?>	    
-    		<table>
-    			<tr class="tr1"><td rowspan="3" class="td1">이미지<td class="td2"><?= $store_name ?><td class="td3"><img src="../common_img/자세히.jpg" onclick="look_more(<?=$no?>)" id="look"><td class="td4">
-    			<?php if($state=="wait"){
-    			     	echo "<img src='../common_img/접수중.JPG'>";
-    			}else if($state=="ing"){
-    			    echo "<img src='../common_img/배달중2.JPG'>";
-    			}else{
-    			    echo "<img src='../common_img/배달완료.JPG'>";
-    			}?>
-    			
-    			<tr class="tr2"><td class="td2">[주문 일자] <?=$order_date ?><td class="td3">[주문 시간]  <?= $order_time ?>
-    				<td class="td4"><button type="button" onclick="location.href='../store/store_view.php?no=<?=$store_no ?>'"><img src="../common_img/주문하기.jpg"></button>
-    			<tr class="tr3"><td class="td2"><?php if($pay=="now-cash"){
-    			                        echo "바로 결제";
-                            			}else if($pay=="now-card"){
-                            			    echo "카드 결제";
-                            			}else if($pay=="after-cash"){
-                            			    echo "만나서 현금 결제";
-                            			}else{
-                            			    echo "만나서 카드 결제";
-                            			}   			                           
-                            			?>  <td class="td3"><?= $total ?>원
-    				<td class="td4"><button type="button" onclick="popupFunc(<?= $store_no?>)"><img src="../common_img/리뷰쓰기.jpg"></button>
-    		</table> 
-	<?php
-	        } //end of while1
-	    
-	    }?> <!-- end of else -->
-	    </div> 
-	</div>
-  
-<footer>
-      <?php include "../common_lib/footer1.php"; ?>
-	</footer>
 </body>
 </html>

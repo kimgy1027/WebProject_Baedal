@@ -1,12 +1,13 @@
 <?php 
 session_start();
-
 $id = $_SESSION['id'];
 
 include "../common_lib/common.php";
 
 $sql= "select * from order_list where id='$id' order by no desc";
 $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 	<meta charset="utf-8">
     <title>배달 홈페이지</title>
     <link rel="stylesheet" href="../common_css/common.css?v=4">
-    <link rel="stylesheet" href="./css/user_order_list.css?v=6">
+    <link rel="stylesheet" href="./css/user_order_list.css?v=12">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 	 function popupFunc(a){
@@ -34,11 +35,10 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 		var no = a; //order_list의 no
 		var screenW=screen.availWidth; //스크린 가로사이즈
  		var screenH=screen.availHeight; //스크린 세로사이즈
- 		var popW=600; //띄울 창의 가로사이즈
- 		var popH=800; //띄울 창의 세로사이즈
+ 		var popW=540; //띄울 창의 가로사이즈
+ 		var popH=820; //띄울 창의 세로사이즈
  		var posL=(screenW-popW)/2;
  		var posT=(screenH-popH)/2;
-	 
 		window.open('./user_order_view.php?no='+no,'주문내역 자세히보기', 'width='+popW+', height='+popH +',top='+posT+',left='+posL, 'location=no,status=no,scrollbars=no');
 
 	 }
@@ -70,20 +70,20 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
 	<?php }else{
 	       while($row=mysqli_fetch_array($result)){
 	        $no=$row['no']; //주문번호는 자세히 보기창 구현에 쓰임
-	        $business_license=$row['business_license'];
+	        $owner_no=$row['owner_no'];
 	        $order_date=$row['order_date'];
 	        $order_time=$row['order_time'];
 	        $total=$row['total'];
 	        $pay=$row['pay'];
 	        $state=$row['state'];
 	        
-	        $sql2= "select * from store_regi where business_license='$business_license'";
+	        $sql2= "select * from store_regi where no=$owner_no";
 	        $result2= mysqli_query($con, $sql2) or die("실패원인2:".mysqli_error($con));
 	        
 	        $row2=mysqli_fetch_array($result2);
 	        $store_no=$row2['no'];
 	        $store_name=$row2['store_name'];
-	        
+
 	        ?>	    
     		<table>
     			<tr class="tr1"><td rowspan="3" class="td1">이미지<td class="td2"><?= $store_name ?><td class="td3"><img src="../common_img/자세히.jpg" onclick="look_more(<?=$no?>)" id="look"><td class="td4">
@@ -107,7 +107,13 @@ $result= mysqli_query($con, $sql) or die("실패원인1:".mysqli_error($con));
                             			    echo "만나서 카드 결제";
                             			}   			                           
                             			?>  <td class="td3"><?= $total ?>원
-    				<td class="td4"><button type="button" onclick="popupFunc(<?= $store_no?>)"><img src="../common_img/리뷰쓰기.jpg"></button>
+    				<td class="td4"><?php //리뷰 정보
+                                            $sql2="select*from review where order_no='$no'";
+                                            $result2= mysqli_query($con, $sql2) or die("실패원인1:".mysqli_error($con));
+                                     				
+    				                    if(!mysqli_num_rows($result2)){?>
+    									<button type="button" onclick="popupFunc(<?= $store_no?>)"><img src="../common_img/리뷰쓰기.jpg"></button>
+    								<?php }?>
     		</table> 
 	<?php
 	        } //end of while1
