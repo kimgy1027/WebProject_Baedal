@@ -29,7 +29,7 @@ if(isset($_SESSION[user]) && $_SESSION[user] == "admin"){
 ?>
 	<ul class="login">
   <li> <a href="../login/logout.php">로그아웃</a></li>
-  <li> <a href="#" >주문내역</a> &nbsp;&nbsp;|</li>
+  <li> <a href="../user_order/user_order_list.php" >주문내역</a> &nbsp;&nbsp;|</li>
   <li> <a href="../user_info/confirm_pw.php">내정보</a> &nbsp;&nbsp;|</li>
   <li> <?=$_SESSION[nick]?>님 안녕하세요! </li> 
 </ul>

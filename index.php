@@ -314,8 +314,8 @@
         <img src="./common_img/logo.JPG" width="150px">
         <br>
         <br>
-     	  <input type="text" placeholder="아이디" name="id"/>
-          <input type="password" name="pass" placeholder="패스워드"/>
+     	  <input type="text" placeholder="아이디" name="id" autocomplete="off">
+          <input type="password" name="pass" placeholder="패스워드" autocomplete="off">
           <div style="text-align: left">
             <div class="clearfix" style="display:inline-block;">
             </div>

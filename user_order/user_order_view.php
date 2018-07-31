@@ -18,6 +18,7 @@ $order_date=$row['order_date'];
 $order_time=$row['order_time'];
 $pay=$row['pay'];
 $total=$row['total'];
+$state=$row['state'];
 
 //배달정보//
 $phone=$row['phone'];
@@ -37,6 +38,7 @@ $result2= mysqli_query($con, $sql2) or die("실패원인1:".mysqli_error($con));
 //리뷰 정보
 $sql3="select*from review where order_no='$no'";
 $result3= mysqli_query($con, $sql3) or die("실패원인1:".mysqli_error($con));
+
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +46,26 @@ $result3= mysqli_query($con, $sql3) or die("실패원인1:".mysqli_error($con));
 <head>
 	<meta charset="utf-8">
     <title>배달내역 자세히보기</title>
-    <link rel="stylesheet" href="./css/user_order_view.css?v=5">
+    <link rel="stylesheet" href="./css/user_order_view.css?v=6">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
+	 function popupFunc(a){
+ 		var no = a; //store_regi의 no
+ 		var screenW=screen.availWidth; //스크린 가로사이즈
+ 		var screenH=screen.availHeight; //스크린 세로사이즈
+ 		var popW=440; //띄울 창의 가로사이즈
+ 		var popH=450; //띄울 창의 세로사이즈
+ 		var posL=(screenW-popW)/2;
+ 		var posT=(screenH-popH)/2;
+
+ 		window.open('./review.php?no='+no,'리뷰 남기기', 'width='+popW+', height='+popH +',top='+posT+',left='+posL, 'location=no,status=no,scrollbars=no');
+ 	}
+	 
+	 function orderCancel(){
+		 alert("주문을 취소하시겠습니까?");
+		 window.close();
+	 }
+	 
 	</script>
 </head>
 <body>
@@ -55,9 +74,11 @@ $result3= mysqli_query($con, $sql3) or die("실패원인1:".mysqli_error($con));
 			<table>
 			<tr class="tr1"><td class="td1"><?=$store_name?>
 			<tr class="tr2"><td class="td1"><button id="order" type="button" onclick="location.href='../store/store_view.php?no=<?=$owner_no ?>'"><img  src="../common_img/주문하기.jpg"></button>
-			<?php if(!mysqli_num_rows($result3)){?>
+			<?php if($state=="wait"){?>
+			<button id="cancel" type="button" onclick="orderCancel()"><img src="../common_img/주문취소.jpg"></button>
+			<?php }else if(!mysqli_num_rows($result3)){?>
 			<button id="review" type="button" onclick="popupFunc(<?= $owner_no?>)"><img src="../common_img/리뷰쓰기.jpg"></button>
-			<?php }?>
+			<?php }else{}?>
 			</table>
 		</div>
 	

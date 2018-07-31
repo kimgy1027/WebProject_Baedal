@@ -295,7 +295,7 @@ $business_license=$_GET['business_license'];
     	  
     	            $row = mysqli_fetch_array($result);
     	            
-    	            $owner_num = $row['owner_num'];
+    	            $owner_num = $row['no'];
     	            $owner_id = $row['owner_id'];
     	            $owner_name = $row['owner_name'];
     	            $owner_store_name = $row['owner_store_name'];
@@ -313,6 +313,8 @@ $business_license=$_GET['business_license'];
     	            
     	            $store_day_off = $row['store_day_off'];
     	            $store_origin = $row['store_origin'];
+    	            $store_payment = $row['store_payment'];
+    	            $store_min_price = $row['store_min_price'];
     	            
     	            $store_phone = $row['store_phone'];
     	            $store_hp=explode("-", $store_phone);
@@ -415,11 +417,13 @@ $business_license=$_GET['business_license'];
                                             <option value="063">063</option>
                                             <option value="064">064</option>
                                          </select> - <input type="text" value="<?= $hp2 ?>" name="store_phone2" id="block3"> - <input type="text" value="<?= $hp3 ?>" name="store_phone3" id="block3">
-        		<tr><td class="td1">배달가능지역<td class="td2"><input name="store_delivery_area" value="<?= $store_delivery_area ?>" placeholder="예)동 이름을 입력해주세요"></input><td>
+                <tr><td class="td1">최소주문 금액<td class="td2"><input type="number" name="min_price" value='<?=$store_min_price?>'>
+        		<tr><td class="td1">결제수단<td class="td2"> <input type="text" name="payment" value='<?=$store_payment?>'>
+        		<tr><td class="td1">배달가능지역<td class="td2"><textarea name="store_delivery_area" id="store_delivery_area"><?= $store_delivery_area?></textarea></input><td>
         	</table>        	
     	</div><!-- end of store_info -->
     	<div class="store_regi_btn">
-    		<button type='button' onclick="inputStore()"><a href='./regi_ok_update.php?page=<?= $page ?>&owner_num=<?= $owner_num ?>' style="text-decoration: none; color: white;">허  가</a></button><button><a href='./regi_ok_update.php?page=<?= $page ?>&owner_num=<?= $owner_num ?>' style="text-decoration: none; color: white;">취 소</a></button>
+    		<button type='button'><a href='./regi_ok_update.php?page=<?= $page ?>&owner_num=<?= $owner_num ?>' style="text-decoration: none; color: white;">허  가</a></button><button type='button'><a href='./list.php' style="text-decoration: none; color: white;">취 소</a></button>
     	</div>
 	</div><!-- end of store_regi-->
 	

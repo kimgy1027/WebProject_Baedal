@@ -7,7 +7,7 @@
         $id = "";
     }
     
-    $sql = "select * from store_regi where owner_id = '$id' ";
+    $sql = "select * from store_regi where not regi_ok = 'D' and owner_id = '$id' ";
     
     $result = mysqli_query($con, $sql);
     
@@ -21,7 +21,30 @@
 <link rel="stylesheet" href="./css/owner_store_list_style.css?v=1">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>	
-
+	
+	function del_store(){
+		
+		var array = [];
+		
+		$("#select_store:checked").each(function(){
+			array.push($(this).val());
+			
+		});
+		
+	
+		
+		$.ajax({
+			type : "post",
+			url : "./del_store.php",
+			data : { 'checked' : array },
+			success : function(data){
+				alert("선택하신 매장이 삭제신청 처리 되었습니다.");
+				self.close();
+			}
+		});
+		
+		
+	}
 </script>
 </head>
 <body>
@@ -69,10 +92,10 @@
 			<table id="store_table">
 			
 				<tr>
-				    <td rowspan="4"><input type="checkbox" name="select_store" value="<?= $no?>">
+				    <td rowspan="4"><input type="checkbox" name="select_store" id="select_store" value="<?= $no?>">
 					<td rowspan="4" id=store_list_img><img id="store_logo_img" src="./Regi_logo_img_data/<?=$store_logo_img ?>" >					
 					<td><?=$store_name ?>				
-					<td>쿠폰				
+					<!-- <td>쿠폰				
 				<tr>
 					<td>별점 테이블 필요				
 					<td>???? 좋아요 ??
@@ -81,7 +104,7 @@
 					<td>리뷰수				
 				<tr>
 					<td>최소주문금액					
-					<td>			
+					<td>	 -->		
 			</table>
 		</div>
 					
@@ -90,7 +113,7 @@
 				<tr class="tr1"><td colspan="2" >영 업 상 태
 				<tr class="tr2"><td id="td1" colspan="2" rowspan="2">영 업 종 료
 				<tr class="tr2">
-				<tr class="tr3"><td id="td1"><?= $store_delivery_time_start ?>/<?= $store_delivery_time_end ?><td>13:00:00
+				<tr class="tr3"><td id="td1"><td>13:00:00
 				<tr class="tr4"><td id="td1">총 주문 수<td>17
 			</table>		
 		</div><!-- end of store_list_info2 -->
@@ -98,7 +121,7 @@
 }
 	?>
 	<div class="store_btn">
-		<button id=store_regi onclick="location.href='owner_store_regi_form.php'">삭제 요청</button>
+		<button id=store_regi type ="button" onclick="del_store()">삭제 요청</button>
 	</div>
 	</div><!-- end of store_list -->
 	</body>

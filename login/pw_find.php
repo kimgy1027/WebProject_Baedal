@@ -1,22 +1,6 @@
 <?php 
 include "../common_lib/common.php";
-if(isset($email)){
-    $sql = "select * from membership where email='$email'";
-    $result = mysqli_query($con, $sql) or die("실패원인 : ".mysqli_error($con));
-    if(mysqli_num_rows($result)==0){
-        echo "<script>
-          alert('회원님의 정보가 존재하지 않습니다.');
-        </script>";
-    }else{
-        $row = mysqli_fetch_array($result);
-        $emailz = $row['email'];
-    }
-}
 ?>
-<?php 
-$new_pass=$_POST['new_pass'];
-
-?>               
 <!DOCTYPE html>
 <html>
 <head>

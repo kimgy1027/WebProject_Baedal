@@ -13,8 +13,7 @@
       <li class="menu__item"><a href="./store/store_list.php" class="menu__link hover2"><span class="menu__label hover2__label">도시락</span></a></li>
       <li class="menu__item"><a href="./store/store_list.php" class="menu__link hover2"><span class="menu__label hover2__label">카페·디저트</span></a></li>
       <li class="menu__item"><a href="./store/store_list.php" class="menu__link hover2"><span class="menu__label hover2__label">패스트푸드</span></a></li>
-      <li class="menu__item"><a href="./store/store_list.php" class="menu__link hover2"><span class="menu__label hover2__label">프랜차이즈</span></a></li>
-      <li class="menu__item"><a href="#" class="menu__link hover2"><span class="menu__label hover2__label">맛집랭킹</span></a></li>
+      <li class="menu__item"><a href="./Ranking/ranking.php" class="menu__link hover2"><span class="menu__label hover2__label">맛집랭킹</span></a></li>
     </ul>
 
     

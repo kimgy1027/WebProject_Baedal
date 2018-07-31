@@ -16,7 +16,7 @@ while($row= mysqli_fetch_array($result)){
     $rs_href = "./store/store_list.php?town=".$search_value;
     
     
-    echo "<a href='$rs_href'><div style='padding : 5px 5px; border-bottom : 1px solid #dddddd; background-color: white;'>".$search_value."</div></a>";
+    echo "<a style='text-decoration: none; color: #2ac1bc' href='$rs_href'><div style=' padding : 5px 5px; border-bottom : 1px solid #dddddd; background-color: white;'>".$search_value."</div></a>";
     
     $count--;
     if(!$count){

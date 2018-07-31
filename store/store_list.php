@@ -40,6 +40,9 @@
     
     $record_num = mysqli_num_rows($result);
     
+    
+   
+    
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +51,7 @@
 <meta charset="utf-8">
 <title>배달 홈페이지</title>
 <link rel="stylesheet" href="../common_css/index_style.css?v=1">
-<link rel="stylesheet" href="./css/store_list_style.css?v=8">
+<link rel="stylesheet" href="./css/store_list_style.css?v=9">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>	
 		function tableClicked(elem){
@@ -181,6 +184,17 @@
 	    $regi_ok = $row['regi_ok'];
 	    $menu_ok = $row['menu_ok'];
 	    
+	    
+	    $sql3 = "select star from review where owner_no = $owner_num";
+	    $star_result = mysqli_query($con, $sql3);
+	    $star_count = mysqli_num_rows($star_result);
+	    $star_sum = 0;
+	    while($row = mysqli_fetch_array($star_result)){
+	        $star_sum += $row[star];
+	    }
+	    
+	    $star_point = $star_sum/$star_count;
+	    $star_point = round($star_point);
 	 ?>
 	<div class="store_list_info1">
 			
@@ -189,9 +203,19 @@
 				<tr>
 					<td rowspan="4" id=store_list_img><img style="width:125px; height:125px;" src="../owner_store/Regi_logo_img_data/<?=$store_logo_img?>"> 		 			
 					<td><?= $store_name?><input name="owner_num" type="hidden" value="<?=$owner_num ?>">		
-					<td>쿠폰				
+					<td>쿠폰			
 				<tr>
-					<td>별점					
+					<td><p style="display:inline;" class="star_rating">
+                        	<?php
+                        	for($j=0;$j<5;$j++){
+                        	    if($j<$star_point){
+                        	        echo "<a class='on'>★</a>";
+                        	    }else{
+                        	        echo "<a>★</a>";
+                        	    }
+                        	}
+                        	?>
+                          </p>					
 					<td>좋아요수
 				<tr>
 					<td>대표메뉴					

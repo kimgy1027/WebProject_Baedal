@@ -33,6 +33,7 @@ header li {
 	font-weight: bold;
 	font-family: NANUMSQUARER; /*폰트 */
 	
+	
 }
 
 .logo img{
@@ -50,13 +51,19 @@ nav {
 	margin: 2px auto 0 auto;
 	border: 1px solid black;
 	text-align: center;
+	
 }
 
 nav li {
-	float: left;
+	/* float: left;
 	list-style: none;
 	margin-top: 5px;
 	margin-right: 25px;
+	font-weight: bold; */
+	
+	display: inline; /*인라인으로 정렬*/
+	margin-top: 5px;
+	margin-right: 20px;
 	font-weight: bold;
 }
 
@@ -109,6 +116,7 @@ nav li {
 .hover2:after{
 	 background-color: #2ac1bc;
 } 
+
 
 .menu1_1 a{
   text-decoration: none;

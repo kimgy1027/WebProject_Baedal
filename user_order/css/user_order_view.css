@@ -29,6 +29,10 @@
 	height: 35px;
 	vertical-align: middle;
 }
+.store_info #cancel img{
+	height: 35px;
+	vertical-align: middle;
+}
 .store_info #order img{
 	height: 30px;
 	vertical-align: middle;
@@ -49,7 +53,10 @@
 	border: solid gray 1px;
 	padding: 7px 15px 7px 15px;
 }
-
+.store_info #cancel{
+	background-color: #F5A66A;
+	padding: 9px 17px 9px 17px;
+}
 .order_info_view{
 	font-family: 'NANUMSQUARER';
 	font-weight: bold;

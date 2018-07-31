@@ -22,6 +22,21 @@ if(empty($search_value)){
     <link rel="stylesheet" href="../common_css/common.css">
     <link rel="stylesheet" href="./css/memberlist.css?v=1">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <script>
+    	$(document).ready(function() {
+    	   $("#btnExport").click(function (e) {
+    	      window.open('data:application/vnd.ms-excel;chsarset=utf-8,\uFEFF' + encodeURI($('#dvData').html()));
+    	       e.preventDefault();
+    	   });
+
+    	});
+    	
+    	
+    
+    </script>
+    
+    
 </head>
 	<header>
 		<?php include "../common_lib/top_login2.php"; ?>
@@ -47,6 +62,7 @@ if(empty($search_value)){
 				</select>
         <input type="text" name="search_value">
         <input type="submit" value="검색" id="form1">
+        <button type="button" id="btnExport">엑셀 다운로드</button>
 		</form>
 		</div>	
 		
@@ -151,5 +167,44 @@ if(empty($search_value)){
 	<footer>
       <?php include "../common_lib/footer1.php"; ?>
 	</footer>
+	
+	<div id="dvData">
+    <table style="visibility: hidden;border-collapse: collapse;
+   font-family: "Trebuchet MS", Helvetica, sans-serif;">
+    <?php 
+$sql = "select * from membership";
+$result = mysqli_query($con, $sql) or die("실패원인 : " . mysqli_error($con));
+$total = mysqli_num_rows($result);
+?>
+<tr>
+           <td style="border: 1px solid black; text-align: center;">점주/고객</td>
+           <td style="border: 1px solid black; text-align: center;">아이디</td>
+           <td style="border: 1px solid black; text-align: center;">닉네임</td>
+           <td style="border: 1px solid black; text-align: center;">이메일</td>
+        </tr>
+<?php 
+for ($i = 0; $i < $total; $i ++) {
+    mysqli_data_seek($result, $i);
+    $row = mysqli_fetch_array($result);
+    $user = $row[user];
+    $id = $row[id];
+    $nick = $row[nick];
+    $email = $row[email];
+    
+?>
+      <tr>
+           <td style="border: 1px solid black; text-align: center;" ><?=$user ?></td>
+           <td style="border: 1px solid black;text-align: center;"><?=$id ?></td>
+           <td style="border: 1px solid black;text-align: center;"><?=$nick ?></td>
+           <td style="border: 1px solid black;text-align: center;"><?=$email ?></td>
+        </tr>
+<?php }?>
+        <tr>
+           <td colspan="2" style="border: 1px solid black; text-align: center;" >총 회원 수</td>
+           <td colspan="2"  style="border: 1px solid black;text-align: center;"><?=$total ?></td>
+        </tr>
+    </table>
+</div>
+	
 </body>
 </html>

@@ -293,17 +293,18 @@
 		
 	}
     	
-    	
+    	/* 
     	
     	function checkInput(text){
     		if(text.value==""){
     			$(text).attr('placeholder', '해당 내용을 입력해주세요!')
     			
     		}
-    	}
+    	} */
     	
     	function search_func(){
-			var search = $("#asearch").val();
+    	    var search = $("#asearch").val();
+    	    
     		$.ajax({
 				type : "post",
 				url : "../search/search_result2.php",
@@ -317,7 +318,29 @@
 		}
     	
     	function insert_textarea(elem){
-    		 $("#store_delivery_area").val($("#store_delivery_area").val() + $(elem).val() + "/");
+
+    		var store_delivery_area = $("#store_delivery_area").val();
+    		
+    		var strArray = store_delivery_area.split("/");
+    		var allstr ='';
+    		var flag = "no";
+    		for(var i in strArray){
+    			if(strArray[i]){
+    				if(strArray[i] == $(elem).val()){// strarray에 elem값과 같다면
+    					
+    					strArray.splice(i,1);
+    					alert("여기");
+        			}else{
+        				allstr += strArray[i] + "/";
+        			}
+    			}
+    			
+    			
+    		}
+    		
+    		
+    		 $("#store_delivery_area").val(allstr + $(elem).val() + "/"); 
+    		/*  $("#store_delivery_area").val($("#store_delivery_area").val() + $(elem).val() + "/"); */
     	}
     	
     	
@@ -348,7 +371,7 @@
 		<br>
 		<p>사업자 정보</p>		
     	<table class="s_info">
-    		<tr><td class="td1">대표자명<td class="td2"><input type="text" name="owner_name" placeholder="예) 김동진" onblur="checkInput(this)"><td class="td3" colspan="2">사업자 등록증 사진          
+    		<tr><td class="td1">대표자명<td class="td2"><input type="text" name="owner_name" placeholder="예) 김동진"><td class="td3" colspan="2">사업자 등록증 사진          
     		<tr><td class="td1">상 호 명<td class="td2"><input type="text" name="owner_store_name" placeholder="예) 주식회사 배달의신"><td rowspan="4" style="text-align: center"><img class='' id="loadImg1" src="../common_img/사진없음.JPG"> 
     		<tr><td class="td1">사업자 주소<td class="td2"><input type="text" name="owner_address" placeholder="예) 서울시 광진구 화양동 111-27">
     		<tr><td class="td1">사업자 등록번호<td class="td2"><input type="text" name="business_license" placeholder="예) 1775100068"><td><input class="content" type="file" id="business_license_img" name="business_license_img" onchange="handleImgFileSelect(this,0)"> 
